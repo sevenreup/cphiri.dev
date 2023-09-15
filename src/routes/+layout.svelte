@@ -1,5 +1,8 @@
 <script>
-    import "../app.css";
-  </script>
-  
-  <slot />
+	import '../app.postcss';
+	import Navbar from '$lib/components/navbar/index.svelte';
+</script>
+
+<Navbar />
+
+<slot />

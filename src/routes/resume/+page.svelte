@@ -5,6 +5,6 @@
 <div>
 	<div class="h-16" />
 	{#each data as item}
-		<div>Fake Data {item}</div>
+		<div>Fake Resume {item}</div>
 	{/each}
 </div>
