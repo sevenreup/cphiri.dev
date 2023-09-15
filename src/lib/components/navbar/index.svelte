@@ -1,4 +1,5 @@
 <script>
+	import { page } from '$app/stores';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import { Twitter, Dribbble, Instagram } from 'lucide-svelte';
 
@@ -11,10 +12,13 @@
 
 <nav class="fixed w-full h-16 flex items-center">
 	<div class="flex flex-row justify-between w-full m-4 items-center">
-		<div>Chris</div>
+		<div class="hidden md:block">Seven</div>
+		<div class="md:hidden">7</div>
 		<div class="bg-muted p-3 rounded-3xl">
-			<a href="/" class="bg-background p-2 rounded-3xl">Stuff</a>
-			<a href="/resume">Resume</a>
+			<a href="/" class="header-link" class:active={$page.url.pathname === '/'}>Stuff</a>
+			<a href="/resume" class="header-link" class:active={$page.url.pathname === '/resume'}
+				>Resume</a
+			>
 		</div>
 		<div class="hidden md:flex gap-4">
 			<a href={links.twitter} class="link-icon"><Twitter /> Twitter</a>
@@ -48,5 +52,13 @@
 	}
 	.drop-item {
 		@apply flex gap-4;
+	}
+
+	.header-link {
+		@apply p-2 rounded-3xl;
+	}
+
+	.active {
+		@apply bg-[#3E3E3E] text-white;
 	}
 </style>

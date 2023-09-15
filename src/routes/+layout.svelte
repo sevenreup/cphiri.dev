@@ -5,4 +5,6 @@
 
 <Navbar />
 
-<slot />
+<main class="container">
+	<slot />
+</main>
