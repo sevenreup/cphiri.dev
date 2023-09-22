@@ -24,7 +24,7 @@
 			<div class="flex flex-col gap-6">
 				<div class="experience-title-date">
 					<div class="text-xl">{position}</div>
-					<div class="text-muted">{meta}</div>
+					<div class="text-muted-foreground">{meta}</div>
 				</div>
 				<div class="text-projectpage-body info">
 					{body}
