@@ -1,7 +1,8 @@
 <script>
 	import { page } from '$app/stores';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
-	import { Twitter, Dribbble, Instagram } from 'lucide-svelte';
+	import { Twitter, Dribbble, Instagram, Link } from 'lucide-svelte';
+	import ThemeSwitch from '../themeSwitch.svelte';
 
 	const links = {
 		twitter: '',
@@ -20,28 +21,34 @@
 				>Resume</a
 			>
 		</div>
-		<div class="hidden md:flex gap-4">
-			<a href={links.twitter} class="link-icon"><Twitter /> Twitter</a>
-			<a href={links.dribbble} class="link-icon"><Dribbble /> Dribble</a>
-			<a href={links.instagram} class="link-icon"><Instagram /> Instagram</a>
-		</div>
-		<div class="md:hidden">
-			<DropdownMenu.Root>
-				<DropdownMenu.Trigger>Socials</DropdownMenu.Trigger>
-				<DropdownMenu.Content>
-					<DropdownMenu.Group>
-						<DropdownMenu.Item>
-							<a href={links.twitter} class="drop-item"><Twitter /> Twitter</a>
-						</DropdownMenu.Item>
-						<DropdownMenu.Item>
-							<a href={links.dribbble} class="drop-item"><Dribbble /> Dribble</a>
-						</DropdownMenu.Item>
-						<DropdownMenu.Item>
-							<a href={links.instagram} class="drop-item"><Instagram /> Instagram</a>
-						</DropdownMenu.Item>
-					</DropdownMenu.Group>
-				</DropdownMenu.Content>
-			</DropdownMenu.Root>
+		<div class="flex items-center gap-4">
+			<ThemeSwitch isMobile={false} />
+			<ThemeSwitch isMobile={true} />
+			<div class="hidden md:flex gap-4">
+				<a href={links.twitter} class="link-icon"><Twitter /> Twitter</a>
+				<a href={links.dribbble} class="link-icon"><Dribbble /> Dribble</a>
+				<a href={links.instagram} class="link-icon"><Instagram /> Instagram</a>
+			</div>
+			<div class="md:hidden">
+				<DropdownMenu.Root>
+					<DropdownMenu.Trigger class="h-9 w-9 flex justify-center items-center">
+						<Link />
+					</DropdownMenu.Trigger>
+					<DropdownMenu.Content>
+						<DropdownMenu.Group>
+							<DropdownMenu.Item>
+								<a href={links.twitter} class="drop-item"><Twitter /> Twitter</a>
+							</DropdownMenu.Item>
+							<DropdownMenu.Item>
+								<a href={links.dribbble} class="drop-item"><Dribbble /> Dribble</a>
+							</DropdownMenu.Item>
+							<DropdownMenu.Item>
+								<a href={links.instagram} class="drop-item"><Instagram /> Instagram</a>
+							</DropdownMenu.Item>
+						</DropdownMenu.Group>
+					</DropdownMenu.Content>
+				</DropdownMenu.Root>
+			</div>
 		</div>
 	</div>
 </nav>
