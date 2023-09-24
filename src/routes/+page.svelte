@@ -1,7 +1,7 @@
 <script>
 	import HeroSvg from '$lib/components/work/hero-svg.svelte';
-
-	let data = [...Array(10)];
+	import { projects } from '$lib/data/projects';
+	import { ChevronLeft, ChevronRight } from 'lucide-svelte';
 </script>
 
 <div class="h-16" />
@@ -28,9 +28,26 @@
 <div class="border-t border-muted w-full pt-12 mt-12">
 	<div class="container">
 		<div class="flex flex-row flex-wrap gap-y-4 w-full">
-			{#each data as item}
+			{#each projects as project}
 				<div class="w-full md:w-1/3 lg:w-1/4">
-					<div class="h-96 bg-gray-200 rounded-lg m-1" />
+					<div class="h-96 bg-gray-200 rounded-lg m-1">
+						<div class="p-2 h-1/2">
+							<img src={project.image} alt={project.name} class="w-full rounded-lg h-full" />
+						</div>
+						<div class="bg-gray-300 rounded-b-lg">
+							<div class="p-2">
+								<h3 class="text-xl font-semibold">{project.name}</h3>
+								<p class="text-sm">{project.description}</p>
+							</div>
+							<div class="w-full flex justify-end p-2">
+								<a href={project.url} target="_blank" rel="noopener noreferrer">
+									<span class="p-2 mr-4">
+										<ChevronRight />
+									</span>
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			{/each}
 		</div>
