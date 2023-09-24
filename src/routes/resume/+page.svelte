@@ -51,44 +51,45 @@
 	];
 </script>
 
-<div>
-	<div class="h-16" />
-	<div class="flex flex-col gap-6">
-		<div class="p-8">
-			<SectionTitle title="Work Experience" subTitle="Dev" />
-			<div class="flex flex-col gap-6">
-				{#each workExperience as { name, position, meta, body, logo }}
-					<WorkExperience {name} {position} {meta} {body}>
-						{#if logo == 'ad'}
-							<Ad />
-						{:else if logo == 'dtree'}
-							<Dtree />
-						{:else}
-							<span>NA</span>
-						{/if}
-					</WorkExperience>
-				{/each}
+<div class="container">
+	<div>
+		<div class="h-16" />
+		<div class="flex flex-col gap-6">
+			<div class="p-8">
+				<SectionTitle title="Work Experience" subTitle="Dev" />
+				<div class="flex flex-col gap-6">
+					{#each workExperience as { name, position, meta, body, logo }}
+						<WorkExperience {name} {position} {meta} {body}>
+							{#if logo == 'ad'}
+								<Ad />
+							{:else if logo == 'dtree'}
+								<Dtree />
+							{:else}
+								<span>NA</span>
+							{/if}
+						</WorkExperience>
+					{/each}
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="flex flex-col gap-6">
-		<div class="p-8">
-			<SectionTitle title="Education" />
-			<div class="content-trailing null flex-1">
-				<div class="flex flex-col gap-6">
-					<div class="experience-title-date">
-						<div class="text-xl">Bachelor of Science in Business Information Technology</div>
-						<div class="text-muted-foreground">Malawi University of Science and Technology</div>
-					</div>
-					<div class="text-projectpage-body info">
-						Major academic highlights (Data structures and algorithms, Database Management Systems,
-						Human-Computer Interaction)
+		<div class="flex flex-col gap-6">
+			<div class="p-8">
+				<SectionTitle title="Education" />
+				<div class="content-trailing null flex-1">
+					<div class="flex flex-col gap-6">
+						<div class="experience-title-date">
+							<div class="text-xl">Bachelor of Science in Business Information Technology</div>
+							<div class="text-muted-foreground">Malawi University of Science and Technology</div>
+						</div>
+						<div class="text-projectpage-body info">
+							Major academic highlights (Data structures and algorithms, Database Management
+							Systems, Human-Computer Interaction)
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- <ul class="list-none">
+		<!-- <ul class="list-none">
 		<li class="pb-8">
 			<div class="p-8">
 				<h3 class="text-md font-medium">Products</h3>
@@ -122,5 +123,6 @@
 			</div>
 		</li>
 	</ul> -->
-	<div class="h-16" />
+		<div class="h-16" />
+	</div>
 </div>

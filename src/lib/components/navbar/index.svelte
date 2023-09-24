@@ -15,7 +15,7 @@
 		<div class="hidden md:block">Seven</div>
 		<div class="md:hidden">7</div>
 		<div class="bg-muted p-3 rounded-3xl">
-			<a href="/" class="header-link" class:active={$page.url.pathname === '/'}>Stuff</a>
+			<a href="/" class="header-link" class:active={$page.url.pathname === '/'}>Work</a>
 			<a href="/resume" class="header-link" class:active={$page.url.pathname === '/resume'}
 				>Resume</a
 			>
