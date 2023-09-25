@@ -41,10 +41,10 @@
 								<p class="text-sm">{project.description}</p>
 							</div>
 							<div class="w-full flex justify-end p-2">
-								{#if project.github != null && project.url != null}
-									<span
-										class="flex flex-row p-1 gap-2 items-center bg-slate-700 text-slate-100 rounded-full"
-									>
+								<span
+									class="flex flex-row p-1 gap-2 items-center bg-slate-700 text-slate-100 rounded-full"
+								>
+									{#if project.github}
 										<a
 											class={cn(
 												'bg-slate-100 h-full rounded-full p-2 text-slate-700 group',
@@ -53,17 +53,13 @@
 											href={project.github}
 										>
 											<GithubIcon />
-											<span class="group-hover:block hidden transition ease-in-out delay-150">Github</span>
+											<span class="">Github</span>
 										</a>
+									{/if}
+									{#if project.url != null}
 										<a class="p-2" href={project.url}>Website</a>
-									</span>
-								{:else if project.url != null}
-									<a href={project.url} target="_blank" rel="noopener noreferrer">
-										<span class="p-2 mr-4 flex flex-row gap-2 items-center">
-											Website <ChevronRight />
-										</span>
-									</a>
-								{/if}
+									{/if}
+								</span>
 							</div>
 						</div>
 					</div>
