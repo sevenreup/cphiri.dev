@@ -3,7 +3,8 @@ export interface Project {
 	name: string;
 	description: string;
 	image: string;
-	url: string;
+	url?: string;
+	github?: string;
 }
 
 export const projects: Project[] = [
@@ -21,6 +22,7 @@ export const projects: Project[] = [
 		description:
 			'A malawian currency converter app that converts Malawian Kwacha to other currencies. Uses rates from banks and other financial institutions in Malawi.',
 		image: '/projects/tools.svg',
-		url: 'https://mandede.cphiri.dev/'
+		url: 'https://tools.cphiri.dev/',
+		github: 'https://github.com/sevenreup/toolbox-web'
 	}
 ];
