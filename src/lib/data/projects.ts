@@ -24,5 +24,14 @@ export const projects: Project[] = [
 		image: '/projects/tools.svg',
 		url: 'https://tools.cphiri.dev/',
 		github: 'https://github.com/sevenreup/toolbox-web'
+	},
+	{
+		id: '3',
+		name: 'WebOs (InProgerss)',
+		description:
+			'Trying to recreate a mobile and desktop os in the browser.',
+		image: '/projects/webos.svg',
+		url: 'https://webos.cphiri.dev/',
+		github: 'https://github.com/sevenreup/web-os'
 	}
 ];
