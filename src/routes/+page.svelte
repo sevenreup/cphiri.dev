@@ -32,8 +32,8 @@
 			{#each projects as project}
 				<div class="w-full md:w-1/3 lg:w-1/4">
 					<div class="h-96 bg-card text-card-foreground rounded-lg m-1">
-						<div class="p-2 h-1/2 bg-slate-700 rounded-xl">
-							<img src={project.image} alt={project.name} class="w-full rounded-lg h-full" />
+						<div class="p-2 h-1/2 bg-slate-700 rounded-xl flex items-center justify-center">
+							<img src={project.image} alt={project.name} class="w-2/5 rounded-lg h-2/5" />
 						</div>
 						<div class="bg-card rounded-b-lg">
 							<div class="p-2">
