@@ -13,9 +13,10 @@
 			<div
 				class={cn(
 					'flex-1 flex justify-center items-center gap-2',
-					'w-64 h-64',
-					'aspect-square bg-neutral-50 dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-xl'
-				)}>
+					'w-full h-52 lg:w-64 lg:h-64',
+					'aspect-square bg-base-300 text-base-content border border-base-100 rounded-xl'
+				)}
+			>
 				<slot />
 			</div>
 			<div class="text-xl font-bold whitespace-pre-line">{name}</div>

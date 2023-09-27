@@ -1,39 +1,46 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
+	import { onMount } from 'svelte';
+	import { themes } from '$lib/themes';
+
 	export let isMobile: boolean = false;
 
-	let darkMode = true;
+	let currentTheme = '';
 
-	function handleSwitchDarkMode() {
-		darkMode = !darkMode;
+	onMount(() => {
+		if (typeof window !== 'undefined') {
+			const theme = window.localStorage.getItem('theme');
+			if (theme && themes.includes(theme)) {
+				document.documentElement.setAttribute('data-theme', theme);
+				currentTheme = theme;
+			}
+		}
+	});
 
-		localStorage.setItem('theme', darkMode ? 'dark' : 'light');
-
-		darkMode
-			? document.documentElement.classList.add('dark')
-			: document.documentElement.classList.remove('dark');
+	function setTheme(theme: string) {
+		if (themes.includes(theme)) {
+			const one_year = 60 * 60 * 24 * 365;
+			window.localStorage.setItem('theme', theme);
+			document.cookie = `theme=${theme}; max-age=${one_year}; path=/; SameSite=Strict;`;
+			document.documentElement.setAttribute('data-theme', theme);
+			currentTheme = theme;
+		}
 	}
 
-	if (browser) {
-		if (
-			localStorage.theme === 'dark' ||
-			(!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-		) {
-			document.documentElement.classList.add('dark');
-			darkMode = true;
+	function toggleTheme() {
+		if (currentTheme == 'light') {
+			setTheme('dark');
 		} else {
-			document.documentElement.classList.remove('dark');
-			darkMode = false;
+			setTheme('light');
 		}
 	}
 </script>
 
 <button
 	aria-label="switch theme"
-	on:click={handleSwitchDarkMode}
+	on:click={toggleTheme}
 	class="switcher group {isMobile
 		? 'lg:hidden'
-		: 'hidden'} relative h-9 w-9 rounded-full before:absolute before:inset-0 before:rounded-full before:border before:border-gray-200 before:bg-gray-50 before:bg-gradient-to-b before:transition-transform before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700 dark:before:bg-gray-800 lg:flex"
+		: 'hidden'} relative h-9 w-9 rounded-full before:absolute before:inset-0 before:rounded-full before:border before:border-base-100 before:bg-base-300 before:bg-gradient-to-b before:transition-transform before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 lg:flex"
 >
 	<svg
 		xmlns="http://www.w3.org/2000/svg"

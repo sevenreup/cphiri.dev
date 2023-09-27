@@ -13,9 +13,9 @@
 
 <nav class="fixed w-full h-16 flex items-center">
 	<div class="flex flex-row justify-between w-full m-4 items-center">
-		<div class="hidden md:block">Seven</div>
-		<div class="md:hidden">7</div>
-		<div class="bg-muted p-3 rounded-3xl">
+		<div class="hidden md:block font-bold">Seven</div>
+		<div class="md:hidden font-bold">7</div>
+		<div class="bg-base-300 p-3 rounded-3xl">
 			<a href="/" class="header-link" class:active={$page.url.pathname === '/'}>Work</a>
 			<a href="/resume" class="header-link" class:active={$page.url.pathname === '/resume'}
 				>Resume</a
@@ -55,7 +55,7 @@
 
 <style lang="postcss">
 	.link-icon {
-		@apply flex h-min p-2 rounded-3xl gap-2 hover:bg-slate-600 transition-all;
+		@apply flex h-min p-2 rounded-3xl gap-2 hover:bg-base-200 hover:text-base-content transition-all;
 	}
 	.drop-item {
 		@apply flex gap-4;
@@ -66,6 +66,6 @@
 	}
 
 	.active {
-		@apply bg-[#3E3E3E] text-white;
+		@apply bg-base-100 text-base-content;
 	}
 </style>

@@ -2,7 +2,7 @@
 	import HeroSvg from '$lib/components/work/hero-svg.svelte';
 	import { projects } from '$lib/data/projects';
 	import { cn } from '$lib/utils';
-	import { ChevronRight, GithubIcon } from 'lucide-svelte';
+	import { GithubIcon } from 'lucide-svelte';
 </script>
 
 <div class="h-16" />
@@ -26,13 +26,13 @@
 		</div>
 	</div>
 </div>
-<div class="border-t border-muted w-full pt-12 mt-12">
+<div class="border-t border-base-300 w-full pt-12 mt-12">
 	<div class="container">
 		<div class="flex flex-row flex-wrap gap-y-4 w-full">
 			{#each projects as project}
 				<div class="w-full md:w-1/3 lg:w-1/4">
 					<div class="h-96 bg-card text-card-foreground rounded-lg m-1">
-						<div class="p-2 h-1/2">
+						<div class="p-2 h-1/2 bg-slate-700 rounded-xl">
 							<img src={project.image} alt={project.name} class="w-full rounded-lg h-full" />
 						</div>
 						<div class="bg-card rounded-b-lg">
@@ -42,12 +42,12 @@
 							</div>
 							<div class="w-full flex justify-end p-2">
 								<span
-									class="flex flex-row p-1 gap-2 items-center bg-slate-700 text-slate-100 rounded-full"
+									class="flex flex-row p-1 gap-2 items-center bg-base-300 text-base-content rounded-full"
 								>
 									{#if project.github}
 										<a
 											class={cn(
-												'bg-slate-100 h-full rounded-full p-2 text-slate-700 group',
+												'bg-neutral h-full rounded-full p-2 text-neutral-content group',
 												'flex flex-row items-center'
 											)}
 											href={project.github}
