@@ -1,8 +1,19 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-	content: ['./src/**/*.{html,js,svelte,ts}'],
-	theme: {
-		extend: {}
-	},
-	plugins: []
+const config = {
+  darkMode: ["class"],
+  content: ["./src/**/*.{html,js,svelte,ts}"],
+  theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px"
+      }
+    },
+  },
+  daisyui: {
+    themes: ["light", "dark",],
+  },
+  plugins: [require("daisyui")],
 };
+export default config;
