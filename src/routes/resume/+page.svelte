@@ -28,9 +28,9 @@
 			logo: 'ad'
 		},
 		{
-			name: 'OrderPro',
+			name: 'Alcor Technologies',
 			position: 'Software Engineer',
-			meta: '2018 - 2020',
+			meta: '2018',
 			body: `Developed cross platform (Flutter) as well as native mobile applications and created web apps for clients`,
 			logo: 'orderpro'
 		},
