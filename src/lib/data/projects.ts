@@ -9,6 +9,11 @@ export interface Project {
 	isPersonal?: boolean;
 }
 
+export interface UIShots {
+	url: string;
+	image: string;
+}
+
 export const projects: Project[] = [
 	{
 		id: '1',
@@ -61,3 +66,19 @@ export const projects: Project[] = [
 		types: ['web', 'mobile']
 	}
 ];
+
+
+export const uiShots: UIShots[] = [
+	{
+		url: 'https://dribbble.com/shots/22826141-Alcor-website-design',
+		image: '/ui/3.png'
+	},
+	{
+		url: 'https://dribbble.com/shots/15303466-Budget-App-design',
+		image: '/ui/1.png'
+	},
+	{
+		url: 'https://dribbble.com/shots/18940857-Dating-App-Design',
+		image: '/ui/2.png'
+	}
+]

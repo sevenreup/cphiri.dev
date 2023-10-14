@@ -16,7 +16,7 @@
 	};
 </script>
 
-<nav class="fixed w-full h-16 flex items-center">
+<nav class="fixed w-full h-16 flex items-center z-50">
 	<div class="flex flex-row justify-between w-full m-4 items-center">
 		<div
 			class={cn(
