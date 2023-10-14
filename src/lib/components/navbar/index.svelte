@@ -20,12 +20,12 @@
 	<div class="flex flex-row justify-between w-full m-4 items-center">
 		<div
 			class={cn(
-				'flex flex-row justify-center items-center p-2 rounded-full',
+				'flex flex-row justify-center items-center p-2 rounded-full gap-2',
 				isScrolling ? 'navbg-item' : ''
 			)}
 		>
+			<img src="/logo.png" alt="logo" class="h-6 md:h-8" />
 			<div class="hidden md:block font-bold">Seven</div>
-			<div class="md:hidden font-bold">7</div>
 		</div>
 		<div class="navbg-item p-3 rounded-3xl">
 			<a href="/" class="header-link" class:active={$page.url.pathname === '/'}>Work</a>
@@ -33,7 +33,7 @@
 				>Resume</a
 			>
 		</div>
-		<div class="flex items-center gap-4">
+		<div class="flex items-center gap-2 md:gap-4">
 			<ThemeSwitch isMobile={false} />
 			<ThemeSwitch isMobile={true} />
 			<div class="hidden md:flex gap-2">
@@ -60,8 +60,10 @@
 			</div>
 			<div class="md:hidden">
 				<DropdownMenu.Root>
-					<DropdownMenu.Trigger class="h-9 w-9 flex justify-center items-center bg-base-300/75 backdrop-blur p-2 rounded-full">
-						<Link/>
+					<DropdownMenu.Trigger
+						class="h-9 w-9 flex justify-center items-center bg-base-300/75 backdrop-blur p-2 rounded-full"
+					>
+						<Link />
 					</DropdownMenu.Trigger>
 					<DropdownMenu.Content class="bg-base-300 border-0">
 						<DropdownMenu.Group>
