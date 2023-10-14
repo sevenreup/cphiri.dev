@@ -3,9 +3,10 @@ export interface Project {
 	name: string;
 	description: string;
 	image: string;
-	url?: string;
 	github?: string;
 	types: string[];
+	url?: string;
+	isPersonal?: boolean;
 }
 
 export const projects: Project[] = [
@@ -14,6 +15,7 @@ export const projects: Project[] = [
 		name: 'Mandede',
 		description:
 			'A malawian currency converter app that converts Malawian Kwacha to other currencies. Uses rates from banks and other financial institutions in Malawi.',
+		isPersonal: true,
 		image: '/projects/mandede.svg',
 		url: 'https://mandede.cphiri.dev/',
 		types: ['web', 'mobile']
@@ -23,6 +25,7 @@ export const projects: Project[] = [
 		name: 'Tools',
 		description:
 			'A malawian currency converter app that converts Malawian Kwacha to other currencies. Uses rates from banks and other financial institutions in Malawi.',
+		isPersonal: true,
 		image: '/projects/tools.svg',
 		url: 'https://tools.cphiri.dev/',
 		github: 'https://github.com/sevenreup/toolbox-web',
@@ -32,9 +35,29 @@ export const projects: Project[] = [
 		id: '3',
 		name: 'WebOs (InProgerss)',
 		description: 'Trying to recreate a mobile and desktop os in the browser.',
+		isPersonal: true,
 		image: '/projects/webos.svg',
 		url: 'https://webos.cphiri.dev/',
 		github: 'https://github.com/sevenreup/web-os',
 		types: ['web']
+	},
+	{
+		id: '4',
+		name: 'Alcor',
+		description: 'Alcor is a digital agency that provides web and mobile solutions to businesses.',
+		isPersonal: false,
+		image: '/projects/alcor.svg',
+		url: 'https://www.alcor.dev/',
+		types: ['web']
+	},
+	{
+		id: '5',
+		name: 'Health Aware',
+		description:
+			'Health Aware is mobile application designed to keep you informed and educated about all the health-related issues that matter to you',
+		isPersonal: false,
+		image: '/projects/health_aware.svg',
+		url: 'https://health.alcor.dev/',
+		types: ['web', 'mobile']
 	}
 ];
