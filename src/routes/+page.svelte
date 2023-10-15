@@ -177,3 +177,8 @@
 </div>
 
 <div class="h-24" />
+
+
+<svelte:head>
+	<title>CPhiri | Work</title>
+</svelte:head>

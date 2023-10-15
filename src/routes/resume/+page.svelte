@@ -126,3 +126,7 @@
 		<div class="h-16" />
 	</div>
 </div>
+
+<svelte:head>
+	<title>CPhiri | Resume</title>
+</svelte:head>
