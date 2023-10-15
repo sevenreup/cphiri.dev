@@ -38,7 +38,7 @@ export const projects: Project[] = [
 	},
 	{
 		id: '3',
-		name: 'WebOs (InProgerss)',
+		name: 'WebOs (InProgess)',
 		description: 'Trying to recreate a mobile and desktop os in the browser.',
 		isPersonal: true,
 		image: '/projects/webos.svg',
