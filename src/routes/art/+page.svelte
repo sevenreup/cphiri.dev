@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { artCollection } from '$lib/data/art';
 	import { cn } from '$lib/utils';
+	import Img from '@zerodevx/svelte-img'
 </script>
 
 <div class="h-16" />
@@ -9,7 +10,7 @@
 >
 	{#each artCollection as art}
 		<figure class={cn('item flex justify-center items-center', art.spanHorizontal && 'horizontal', art.spanVertical && 'vertical')}>
-			<img class="w-full h-full" src={art.image} alt={art.title} />
+			<Img class="w-full h-full" src={art.image} alt={art.title} />
 		</figure>
 	{/each}
 </div>

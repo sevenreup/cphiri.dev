@@ -18,7 +18,7 @@
 
 <nav class="fixed w-full h-16 flex items-center z-50">
 	<div class="flex flex-row justify-between w-full m-4 items-center">
-		<div
+		<a href="/"
 			class={cn(
 				'flex flex-row justify-center items-center p-2 rounded-full gap-2',
 				isScrolling ? 'navbg-item' : ''
@@ -26,7 +26,7 @@
 		>
 			<img src="/logo.png" alt="logo" class="h-6 md:h-8" />
 			<div class="hidden md:block font-bold">Seven</div>
-		</div>
+			</a>
 		<div class="navbg-item p-3 rounded-3xl">
 			<a href="/" class="header-link" class:active={$page.url.pathname === '/'}>Work</a>
 			<a href="/resume" class="header-link" class:active={$page.url.pathname === '/resume'}
