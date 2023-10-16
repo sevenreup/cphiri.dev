@@ -29,7 +29,7 @@ export const projects: Project[] = [
 		id: '2',
 		name: 'Tools',
 		description:
-			'A malawian currency converter app that converts Malawian Kwacha to other currencies. Uses rates from banks and other financial institutions in Malawi.',
+			'This is a collection of tools or utilities that are sort of useful.',
 		isPersonal: true,
 		image: '/projects/tools.svg',
 		url: 'https://tools.cphiri.dev/',

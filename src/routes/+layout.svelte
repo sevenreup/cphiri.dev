@@ -16,8 +16,6 @@
 		property="og:description"
 		content="Learn more about Christopher Phiri work experience, education, connections & more."
 	/>
-
-	<title>CPhiri</title>
 	<meta
 		name="description"
 		content="Learn more about Christopher Phiri work experience, education, connections & more."

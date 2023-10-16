@@ -17,7 +17,7 @@
 			name: 'D-Tree',
 			position: 'Software Engineer',
 			meta: '2022 - Present',
-			body: `Develop android app using Kotlin and Jetpack compose, UI/UX Design, System requirements gathering, Implement and work with FHIR standards in native android.`,
+			body: `Develop android apps using Kotlin and Jetpack compose, UI/UX Design, System requirements gathering, Implement and work with FHIR standards in native android.`,
 			logo: 'dtree'
 		},
 		{
@@ -30,7 +30,7 @@
 		{
 			name: 'Alcor Technologies',
 			position: 'Software Engineer',
-			meta: '2018',
+			meta: '2018 - Present',
 			body: `Developed cross platform (Flutter) as well as native mobile applications and created web apps for clients`,
 			logo: 'orderpro'
 		},
@@ -128,5 +128,5 @@
 </div>
 
 <svelte:head>
-	<title>CPhiri | Resume</title>
+	<title>Cphiri | Resume</title>
 </svelte:head>

@@ -173,12 +173,35 @@
 				{/each}
 			</div>
 		</div>
+
+		<div class="mt-6">
+			<div class="p-2 flex flex-col gap-2">
+				<h4 class="text-2xl font-medium">Illustrations</h4>
+				<p>Some of my illustrations.</p>
+			</div>
+			<div>
+				<a
+					href="/art"
+					class="btn btn-accent"
+					>View gallery <svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="16"
+						height="16"
+						fill="currentColor"
+						viewBox="0 0 256 256"
+						class="ml-1"
+						><path d="M216,128l-72,72V56Z" opacity="0.2" /><path
+							d="M221.66,122.34l-72-72A8,8,0,0,0,136,56v64H40a8,8,0,0,0,0,16h96v64a8,8,0,0,0,13.66,5.66l72-72A8,8,0,0,0,221.66,122.34ZM152,180.69V75.31L204.69,128Z"
+						/></svg
+					></a
+				>
+			</div>
+		</div>
 	</div>
 </div>
 
 <div class="h-24" />
 
-
 <svelte:head>
-	<title>CPhiri | Work</title>
+	<title>Cphiri | Work</title>
 </svelte:head>
