@@ -41,7 +41,7 @@
 		<div class="md:container w-full flex flex-col gap-8">
 			<div class="flex flex-col gap-6">
 				<h1 class="text-5xl md:text-8xl">Christopher Phiri</h1>
-				<p class="text-xl md:text-2xl font-light">🔨 This site is still in progress...</p>
+				<p class="text-xl md:text-2xl font-light">🔨 Still in progress...</p>
 			</div>
 			<div class="flex flex-row justify-between w-full">
 				<div>

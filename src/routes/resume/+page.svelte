@@ -2,6 +2,7 @@
 	import SectionTitle from '$lib/components/cv/section-title.svelte';
 	import WorkExperience from '$lib/components/cv/work-experience.svelte';
 	import Ad from '$lib/components/logos/ad.svelte';
+	import Alcor from '$lib/components/logos/alcor.svelte';
 	import Dtree from '$lib/components/logos/dtree.svelte';
 
 	type WorkExperience = {
@@ -32,7 +33,7 @@
 			position: 'Software Engineer',
 			meta: '2018 - Present',
 			body: `Developed cross platform (Flutter) as well as native mobile applications and created web apps for clients`,
-			logo: 'orderpro'
+			logo: 'alcor'
 		},
 		{
 			name: 'Malawi University \nof Science and Technology',
@@ -64,8 +65,10 @@
 								<Ad />
 							{:else if logo == 'dtree'}
 								<Dtree />
+							{:else if logo == 'alcor'}
+								<Alcor />
 							{:else}
-								<span>NA</span>
+								<span>{logo.toLocaleUpperCase()}</span>
 							{/if}
 						</WorkExperience>
 					{/each}
