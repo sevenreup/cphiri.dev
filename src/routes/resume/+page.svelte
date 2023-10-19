@@ -4,6 +4,7 @@
 	import Ad from '$lib/components/logos/ad.svelte';
 	import Alcor from '$lib/components/logos/alcor.svelte';
 	import Dtree from '$lib/components/logos/dtree.svelte';
+	import { Config } from '$lib/config';
 
 	type WorkExperience = {
 		name: string;
@@ -131,5 +132,5 @@
 </div>
 
 <svelte:head>
-	<title>Cphiri | Resume</title>
+	<title>{Config.title} | Resume</title>
 </svelte:head>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Config } from '$lib/config';
 	import { artCollection } from '$lib/data/art';
 	import { cn } from '$lib/utils';
 	import Img from '@zerodevx/svelte-img'
@@ -16,7 +17,7 @@
 </div>
 
 <svelte:head>
-	<title>Cphiri | Art</title>
+	<title>{Config.title} | Art</title>
 </svelte:head>
 
 <style>

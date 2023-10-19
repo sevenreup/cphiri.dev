@@ -5,6 +5,7 @@
 	import { GithubIcon } from 'lucide-svelte';
 	import { scale } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
+	import { Config } from '$lib/config';
 
 	const filters = [
 		{
@@ -203,5 +204,5 @@
 <div class="h-24" />
 
 <svelte:head>
-	<title>Cphiri | Work</title>
+	<title>{Config.title} | Work</title>
 </svelte:head>
