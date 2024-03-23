@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { themes } from '$lib/themes';
+	import { reverseThemeMap, themeMap, themes } from '$lib/themes';
 
 	let currentTheme = '';
-	export let className = "";
+	export let className = '';
 	export let hasTitle = false;
 
 	onMount(() => {
@@ -11,7 +11,7 @@
 			const theme = window.localStorage.getItem('theme');
 			if (theme && themes.includes(theme)) {
 				document.documentElement.setAttribute('data-theme', theme);
-				currentTheme = theme;
+				currentTheme = reverseThemeMap[theme] ?? 'dark';
 			}
 		}
 	});
@@ -22,15 +22,15 @@
 			window.localStorage.setItem('theme', theme);
 			document.cookie = `theme=${theme}; max-age=${one_year}; path=/; SameSite=Strict;`;
 			document.documentElement.setAttribute('data-theme', theme);
-			currentTheme = theme;
+			currentTheme = reverseThemeMap[theme] ?? 'dark';
 		}
 	}
 
 	function toggleTheme() {
 		if (currentTheme == 'light') {
-			setTheme('dark');
+			setTheme(themeMap['dark']);
 		} else {
-			setTheme('light');
+			setTheme(themeMap['light']);
 		}
 	}
 </script>
@@ -38,12 +38,16 @@
 <button
 	aria-label="switch theme"
 	on:click={toggleTheme}
-	class="switcher text-base-content {hasTitle ? "gap-4" : "relative h-9 w-9 rounded-full before:absolute before:inset-0 before:rounded-full before:border before:border-base-100 before:bg-base-300/75 before:bg-gradient-to-b before:transition-transform before:duration-300"} hover:before:scale-105 active:duration-75 active:before:scale-95 lg:flex backdrop-blur {className}"
+	class="switcher text-base-content {hasTitle
+		? 'gap-4'
+		: 'relative h-9 w-9 rounded-full before:absolute before:inset-0 before:rounded-full before:border before:border-base-100 before:bg-base-300/75 before:bg-gradient-to-b before:transition-transform before:duration-300'} hover:before:scale-105 active:duration-75 active:before:scale-95 lg:flex backdrop-blur {className}"
 >
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		fill="currentColor"
-		class="transistion duration-300 group-hover:rotate-180 {hasTitle ? "h-6 w-6" : " h-5 w-5 m-auto relative"}"
+		class="transistion duration-300 group-hover:rotate-180 {hasTitle
+			? 'h-6 w-6'
+			: ' h-5 w-5 m-auto relative'}"
 		viewBox="0 0 256 256"
 	>
 		{#if currentTheme == 'light'}
@@ -56,7 +60,5 @@
 			/>
 		{/if}
 	</svg>
-	{
-		hasTitle ? "Switch Theme" : ""
-	}
+	{hasTitle ? 'Switch Theme' : ''}
 </button>

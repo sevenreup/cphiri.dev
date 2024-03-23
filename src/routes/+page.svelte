@@ -98,7 +98,7 @@
 									{#if project.isPersonal}
 										<div
 											class={cn(
-												'absolute top-0 right-0 bg-primary w-9 h-9 m-1 flex justify-center items-center rounded-full group cursor-pointer',
+												'absolute top-0 right-0 bg-primary text-primary-content w-9 h-9 m-1 flex justify-center items-center rounded-full group cursor-pointer',
 												'transition-all ease-out hover:ease-in',
 												'hover:w-auto hover:px-2'
 											)}

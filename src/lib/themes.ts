@@ -1,33 +1,13 @@
-export const themes = [
-	'light',
-	'dark',
-	'cupcake',
-	'bumblebee',
-	'emerald',
-	'corporate',
-	'synthwave',
-	'retro',
-	'cyberpunk',
-	'valentine',
-	'halloween',
-	'garden',
-	'forest',
-	'aqua',
-	'lofi',
-	'pastel',
-	'fantasy',
-	'wireframe',
-	'black',
-	'luxury',
-	'dracula',
-	'cmyk',
-	'autumn',
-	'business',
-	'acid',
-	'lemonade',
-	'night',
-	'coffee',
-	'winter'
-];
+export const themeMap = {
+	dark: 'dim',
+	light: 'fantasy'
+};
+
+export const reverseThemeMap: Record<string, string> = {
+	dim: 'dark',
+	fantasy: 'light'
+};
+
+export const themes = ['fantasy', 'dim'];
 
 export default themes;

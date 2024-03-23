@@ -110,7 +110,7 @@
 	}
 
 	.active {
-		@apply bg-base-100 text-base-content;
+		@apply bg-primary text-primary-content;
 	}
 
 	.navbg-item {

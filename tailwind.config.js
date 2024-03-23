@@ -12,7 +12,7 @@ const config = {
 		}
 	},
 	daisyui: {
-		themes: ['light', 'dark']
+		themes: ['fantasy', 'dim']
 	},
 	plugins: [require('daisyui'), require('@tailwindcss/typography')]
 };

@@ -1,11 +1,11 @@
-import { themes } from '$lib/themes';
+import { themeMap, themes } from '$lib/themes';
 import type { Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
-	const theme = event.cookies.get('theme');
+	let theme = event.cookies.get('theme');
 
 	if (!theme || !themes.includes(theme)) {
-		return await resolve(event);
+		theme = themeMap['dark'];
 	}
 
 	return await resolve(event, {
