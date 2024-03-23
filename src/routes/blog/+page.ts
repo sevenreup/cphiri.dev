@@ -1,7 +1,7 @@
 import type { PostResponse } from '$lib/types/post';
 
-export const load = async ({ fetch }) => {
-	const response = await fetch(`/api/posts`);
+export const load = async ({ fetch, url }) => {
+	const response = await fetch(`/api/posts${url.search}`);
 	const posts = await response.json();
 
 	return {
