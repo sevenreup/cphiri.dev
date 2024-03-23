@@ -36,7 +36,6 @@
 	}
 </script>
 
-<div class="h-16" />
 <div class="container">
 	<div class="h-96 flex justify-center my-28 w-full">
 		<div class="md:container w-full flex flex-col gap-8">
