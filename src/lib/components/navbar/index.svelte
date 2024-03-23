@@ -1,7 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
-	import { Twitter, Dribbble, Instagram, Link, Github } from 'lucide-svelte';
+	import { Twitter, Dribbble, Instagram, Link, Github, EllipsisVertical } from 'lucide-svelte';
 	import ThemeSwitch from '../themeSwitch.svelte';
 	import { cn } from '$lib/utils';
 
@@ -29,13 +29,15 @@
 			</a>
 		<div class="navbg-item p-3 rounded-3xl">
 			<a href="/" class="header-link" class:active={$page.url.pathname === '/'}>Work</a>
-			<a href="/resume" class="header-link" class:active={$page.url.pathname === '/resume'}
+			<a href="/resume" class="header-link" class:active={$page.url.pathname.startsWith('/resume')}
 				>Resume</a
+			>
+			<a href="/blog" class="header-link" class:active={$page.url.pathname.startsWith('/blog')}
+				>Blog</a
 			>
 		</div>
 		<div class="flex items-center gap-2 md:gap-4">
-			<ThemeSwitch isMobile={false} />
-			<ThemeSwitch isMobile={true} />
+			<ThemeSwitch  className="hidden md:flex"/>
 			<div class="hidden md:flex gap-2">
 				<a
 					href={links.github}
@@ -63,10 +65,14 @@
 					<DropdownMenu.Trigger
 						class="h-9 w-9 flex justify-center items-center bg-base-300/75 backdrop-blur p-2 rounded-full"
 					>
-						<Link />
+						<EllipsisVertical />
 					</DropdownMenu.Trigger>
-					<DropdownMenu.Content class="bg-base-300 border-0">
+					<DropdownMenu.Content class="bg-base-300 border-0 mt-4">
 						<DropdownMenu.Group>
+							<DropdownMenu.Item>
+								<ThemeSwitch className="flex gap-2" hasTitle/>
+							</DropdownMenu.Item>
+							<hr class="my-2"/>
 							<DropdownMenu.Item>
 								<a href={links.github} class="drop-item" target="_blank"><Github /> Github</a>
 							</DropdownMenu.Item>
@@ -104,7 +110,7 @@
 	}
 
 	.active {
-		@apply bg-base-100 text-base-content;
+		@apply bg-primary text-primary-content;
 	}
 
 	.navbg-item {

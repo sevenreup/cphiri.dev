@@ -7,6 +7,7 @@
 
 <Navbar />
 
+<div class="h-16" />
 <slot />
 
 <svelte:head>
