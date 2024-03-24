@@ -25,6 +25,9 @@ devDependencies:
   '@playwright/test':
     specifier: ^1.42.1
     version: 1.42.1
+  '@shikijs/transformers':
+    specifier: ^1.2.0
+    version: 1.2.0
   '@sveltejs/adapter-auto':
     specifier: ^2.1.1
     version: 2.1.1(@sveltejs/kit@1.30.4)
@@ -73,6 +76,9 @@ devDependencies:
   schema-dts:
     specifier: ^1.1.2
     version: 1.1.2(typescript@5.4.3)
+  shiki:
+    specifier: ^1.2.0
+    version: 1.2.0
   svelte:
     specifier: ^4.2.12
     version: 4.2.12
@@ -508,6 +514,16 @@ packages:
       '@types/estree': 1.0.5
       estree-walker: 2.0.2
       picomatch: 2.3.1
+    dev: true
+
+  /@shikijs/core@1.2.0:
+    resolution: {integrity: sha512-OlFvx+nyr5C8zpcMBnSGir0YPD6K11uYhouqhNmm1qLiis4GA7SsGtu07r9gKS9omks8RtQqHrJL4S+lqWK01A==}
+    dev: true
+
+  /@shikijs/transformers@1.2.0:
+    resolution: {integrity: sha512-xKn7DtA65DQV4FOfYsrvqM80xOy2xuXnxWWKsZmHv1VII/IOuDUDsWDu3KnpeLH6wqNJWp1GRoNUsHR1aw/VhQ==}
+    dependencies:
+      shiki: 1.2.0
     dev: true
 
   /@sinclair/typebox@0.27.8:
@@ -2531,6 +2547,12 @@ packages:
   /shebang-regex@3.0.0:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
+
+  /shiki@1.2.0:
+    resolution: {integrity: sha512-xLhiTMOIUXCv5DqJ4I70GgQCtdlzsTqFLZWcMHHG3TAieBUbvEGthdrlPDlX4mL/Wszx9C6rEcxU6kMlg4YlxA==}
+    dependencies:
+      '@shikijs/core': 1.2.0
+    dev: true
 
   /siginfo@2.0.0:
     resolution: {integrity: sha512-ybx0WO1/8bSBLEWXZvEd7gMW3Sn3JFlW3TvX1nREbDLRNQNaeNN8WK0meBwPdAaOI7TtRRRJn/Es1zhrrCHu7g==}

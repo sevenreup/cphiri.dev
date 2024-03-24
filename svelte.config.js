@@ -1,6 +1,7 @@
 import adapter from '@sveltejs/adapter-auto';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 import { mdsvex } from 'mdsvex';
+import highlighter from './highlighter.mjs';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -10,6 +11,9 @@ const config = {
 		vitePreprocess(),
 		mdsvex({
 			extensions: ['.md', '.svx'],
+			highlight:{
+				highlighter,
+		   },
 		})
 	],
 	extensions: ['.svelte', '.md', '.svx'],
