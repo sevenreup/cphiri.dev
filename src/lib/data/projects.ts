@@ -16,6 +16,17 @@ export interface UIShots {
 
 export const projects: Project[] = [
 	{
+		id: '6',
+		name: 'Duwa',
+		description:
+			'A simple programming language based on the Chichewa language. The language is still in development and is not yet ready for production use.',
+		isPersonal: true,
+		image: '/images/duwa.svg',
+		url: 'https://www.duwa.cphiri.dev',
+		github: 'https://github.com/sevenreup/duwa',
+		types: ['languages']
+	},
+	{
 		id: '1',
 		name: 'Mandede',
 		description:
@@ -28,8 +39,7 @@ export const projects: Project[] = [
 	{
 		id: '2',
 		name: 'Tools',
-		description:
-			'This is a collection of tools or utilities that are sort of useful.',
+		description: 'This is a collection of tools or utilities that are sort of useful.',
 		isPersonal: true,
 		image: '/projects/tools.svg',
 		url: 'https://tools.cphiri.dev/',
@@ -67,7 +77,6 @@ export const projects: Project[] = [
 	}
 ];
 
-
 export const uiShots: UIShots[] = [
 	{
 		url: 'https://dribbble.com/shots/22826141-Alcor-website-design',
@@ -81,4 +90,4 @@ export const uiShots: UIShots[] = [
 		url: 'https://dribbble.com/shots/18940857-Dating-App-Design',
 		image: '/ui/2.png'
 	}
-]
+];

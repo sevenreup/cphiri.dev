@@ -1,13 +1,17 @@
+import { fetchMarkdownPosts } from '$lib/utils/posts';
+import { response } from 'super-sitemap';
+
+export const prerender = true;
+
 export async function GET() {
-	return new Response(
-		`<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-        <url>
-            <loc>https://www.cphiri.dev</loc>
-        </url>
-        <url>
-          <loc>https://www.cphiri.dev/resume</loc>
-        </url>
-    </urlset>`.trim(),
-		{ headers: { 'Content-Type': 'application/xml' } }
-	);
+	const allPosts = await fetchMarkdownPosts();
+	return response({
+		origin: 'https://www.cphiri.dev',
+		paramValues: {
+			'/blog/[slug]': allPosts.map((post) => post.slug)
+		},
+		changefreq: 'daily',
+		priority: 0.7,
+		sort: 'alpha'
+	});
 }

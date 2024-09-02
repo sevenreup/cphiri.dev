@@ -17,5 +17,6 @@ export type PostMeta = {
 export type PostResponse = {
 	meta: PostMeta;
 	path: string;
+	slug: string;
 	url: string;
 };

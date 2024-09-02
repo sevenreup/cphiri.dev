@@ -27,6 +27,7 @@ export const fetchMarkdownPosts = async (): Promise<PostResponse[]> => {
 			return {
 				meta: rawMetaToMeta(metadata),
 				path: postPath,
+				slug: postPath.split('/').pop() ?? postPath,
 				url
 			};
 		})

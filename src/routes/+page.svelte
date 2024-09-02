@@ -19,6 +19,10 @@
 		{
 			name: 'Mobile',
 			value: 'mobile'
+		},
+		{
+			name: 'Languages',
+			value: 'languages'
 		}
 	];
 
