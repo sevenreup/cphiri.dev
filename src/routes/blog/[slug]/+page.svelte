@@ -6,22 +6,24 @@
 	let { title, description, date, tags } = data.meta;
 </script>
 
-<div class="container">
-	<div class="h-16" />
-	<div class="flex flex-row flex-wrap items-center justify-between">
-		<div class="flex flex-row flex-wrap gap-2 my-4">
-			{#each tags as tag}
-				<a
-					class="bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded-full"
-					data-sveltekit-reload
-					href={`/blog?tag=${tag}`}>{tag}</a
-				>
-			{/each}
+<div class="relative p-4">
+	<div class="max-w-3xl mx-auto">
+		<div class="h-16" />
+		<div class="flex flex-row flex-wrap items-center justify-between">
+			<div class="flex flex-row flex-wrap gap-2 my-4">
+				{#each tags as tag}
+					<a
+						class="bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded-full"
+						data-sveltekit-reload
+						href={`/blog?tag=${tag}`}>{tag}</a
+					>
+				{/each}
+			</div>
+			<span>Published - {date}</span>
 		</div>
-		<span>Published - {date}</span>
-	</div>
-	<div class="prose md:prose-lg lg:prose-xl">
-		<svelte:component this={data.content} />
+		<div class="prose md:prose-lg lg:prose-xl break-words max-w-none">
+			<svelte:component this={data.content} />
+		</div>
 	</div>
 </div>
 
