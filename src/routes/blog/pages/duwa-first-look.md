@@ -1,11 +1,12 @@
 ---
 title: Duwa first look
-date: '2024-08-29'
+date: '2024-08-29T00:00:00Z'
+modified: '2024-08-29T00:00:00Z'
 description: 'This is the first look at Duwa, a chewa based programming language'
 tags: 'talks,duwa'
 ---
 
-# Creating a Chichewa Programming Language
+# Introducing Duwa a Chichewa Programming Language
 
 ![Duwa Logo](/images/duwa.svg)
 

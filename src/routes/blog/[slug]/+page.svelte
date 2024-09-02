@@ -1,9 +1,13 @@
 <script lang="ts">
 	import { Config } from '$lib/config';
+	import { serializeSchema, blogSchema } from '$lib/seo/ld';
+	import { createPostOgUrl } from '../../../utils/posts';
 	import type { BlogPostData } from './+page';
 
 	export let data: BlogPostData;
 	let { title, description, date, tags } = data.meta;
+
+	const ogUrl = `${Config.url}/og?blog=${data.slug}`;
 </script>
 
 <div class="relative p-4">
@@ -29,5 +33,15 @@
 
 <svelte:head>
 	<title>{Config.title} | {title}</title>
+
+	<meta property="og:title" content={title} />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content={ogUrl} />
+
+	<meta property="og:url" content={createPostOgUrl(data.slug)} />
+
 	<meta name="description" content={description} />
+	<meta property="og:description" content={description} />
+
+	{@html serializeSchema(blogSchema(data.meta, data.slug))}
 </svelte:head>

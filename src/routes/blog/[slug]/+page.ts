@@ -7,7 +7,8 @@ export async function load({ params }) {
 
 	return {
 		content,
-		meta: rawMetaToMeta(post.metadata)
+		meta: rawMetaToMeta(post.metadata),
+		slug: params.slug,
 	};
 }
 
@@ -15,4 +16,5 @@ export type BlogPostData = {
 	meta: PostMeta;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	content: any;
+	slug: string;
 };

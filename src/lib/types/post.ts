@@ -3,18 +3,19 @@ export type PostMetaRaw = {
 	description: string;
 	tags: string;
 	date: string;
+	modified: string;
 };
 
 export type PostMeta = {
 	title: string;
 	description: string;
+	modified: string;
 	date: string;
 	tags: string[];
 };
 
-
 export type PostResponse = {
-    meta: PostMeta;
-    path: string;
+	meta: PostMeta;
+	path: string;
 	url: string;
-}
+};

@@ -10,7 +10,8 @@ export const rawMetaToMeta = (rawMeta: PostMetaRaw): PostMeta => {
 		title: rawMeta.title,
 		description: rawMeta.description,
 		date: rawMeta.date,
-		tags: formatTags(rawMeta.tags)
+		tags: formatTags(rawMeta.tags),
+		modified: rawMeta.modified
 	};
 };
 
