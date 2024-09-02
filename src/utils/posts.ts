@@ -5,5 +5,5 @@ export const createPostUrl = (slug: string) => {
 };
 
 export const createPostOgUrl = (slug: string) => {
-	return `${Config.url}/og?blog=${slug}`;
+	return `${Config.url}/api/og?blog=${slug}`;
 };

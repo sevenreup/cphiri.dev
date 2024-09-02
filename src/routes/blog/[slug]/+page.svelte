@@ -7,7 +7,7 @@
 	export let data: BlogPostData;
 	let { title, description, date, tags } = data.meta;
 
-	const ogUrl = `${Config.url}/og?blog=${data.slug}`;
+	const ogUrl = createPostOgUrl(data.slug);
 </script>
 
 <div class="relative p-4">
