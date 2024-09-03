@@ -168,7 +168,8 @@ Duwa is still a work in progress, and there are some words and constructs that h
 
 Even in its current state, Duwa is fully functional, and I'm excited to see how it grows as I continue to refine it. I’d love to hear your feedback as you experiment with it!
 
-Bonus: Created a simple vscode extension for adding support for Duwa to vscode, for now you will only get syntax highlighting but working on adding more features. Search for `Duwa Language` in the vscode extension tab, or download [here](https://marketplace.visualstudio.com/items?itemName=sevenreup.duwa-lang)
+---
+**Bonus:** Created a simple vscode extension for adding support for Duwa to vscode, for now you will only get syntax highlighting but working on adding more features. Search for `Duwa Language` in the vscode extension tab, or download [here](https://marketplace.visualstudio.com/items?itemName=sevenreup.duwa-lang)
 
 ## Future Development
 
