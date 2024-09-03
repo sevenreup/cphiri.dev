@@ -116,7 +116,7 @@ za(nambala x = 0; x > 5; x++) {
 ## Let's Code: Linear Search Example
 
 To give you a taste of what Duwa can do, here’s a simple linear search algorithm.
-Create new file called `Kufufuza.duwa` in your favorite editor
+Create a new file called `Kufufuza.duwa` in your favorite editor
 
 ```js
 ndondomeko kufufuza(arr, x) {
@@ -169,7 +169,7 @@ Duwa is still a work in progress, and there are some words and constructs that h
 Even in its current state, Duwa is fully functional, and I'm excited to see how it grows as I continue to refine it. I’d love to hear your feedback as you experiment with it!
 
 ---
-**Bonus:** Created a simple vscode extension for adding support for Duwa to vscode, for now you will only get syntax highlighting but working on adding more features. Search for `Duwa Language` in the vscode extension tab, or download [here](https://marketplace.visualstudio.com/items?itemName=sevenreup.duwa-lang)
+**Bonus:** I created a simple vscode extension for adding support for Duwa to vscode, for now, you will only get syntax highlighting but working on adding more features. Search for `Duwa Language` in the vscode extension tab, or download [here](https://marketplace.visualstudio.com/items?itemName=sevenreup.duwa-lang)
 
 ## Future Development
 
