@@ -9,6 +9,7 @@
 
 <div class="h-16" />
 <slot />
+<div class="h-20" />
 
 <svelte:head>
 	<meta property="og:title" content={Config.title} />
