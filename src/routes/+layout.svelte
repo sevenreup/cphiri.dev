@@ -1,5 +1,5 @@
 <script>
-	import '../app.postcss';
+	import '../app.css';
 	import Navbar from '$lib/components/navbar/index.svelte';
 	import { Config } from '$lib/config';
 	import { personalSchema, serializeSchema } from '$lib/seo/ld';

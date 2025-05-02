@@ -40,7 +40,7 @@
 	on:click={toggleTheme}
 	class="switcher text-base-content {hasTitle
 		? 'gap-4'
-		: 'relative h-9 w-9 rounded-full before:absolute before:inset-0 before:rounded-full before:border before:border-base-100 before:bg-base-300/75 before:bg-gradient-to-b before:transition-transform before:duration-300'} hover:before:scale-105 active:duration-75 active:before:scale-95 lg:flex backdrop-blur {className}"
+		: 'relative h-9 w-9 rounded-full before:absolute before:inset-0 before:rounded-full before:border before:border-base-100 before:bg-base-300/75 before:bg-linear-to-b before:transition-transform before:duration-300'} hover:before:scale-105 active:duration-75 active:before:scale-95 lg:flex backdrop-blur {className}"
 >
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
