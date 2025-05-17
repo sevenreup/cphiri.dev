@@ -18,7 +18,8 @@
 
 <nav class="fixed w-full h-16 flex items-center z-50">
 	<div class="flex flex-row justify-between w-full m-4 items-center">
-		<a href="/"
+		<a
+			href="/"
 			class={cn(
 				'flex flex-row justify-center items-center p-2 rounded-full gap-2',
 				isScrolling ? 'navbg-item' : ''
@@ -26,7 +27,7 @@
 		>
 			<img src="/logo.png" alt="logo" class="h-6 md:h-8" />
 			<div class="hidden md:block font-bold">Seven</div>
-			</a>
+		</a>
 		<div class="navbg-item p-3 rounded-3xl">
 			<a href="/" class="header-link" class:active={$page.url.pathname === '/'}>Work</a>
 			<a href="/resume" class="header-link" class:active={$page.url.pathname.startsWith('/resume')}
@@ -37,7 +38,7 @@
 			>
 		</div>
 		<div class="flex items-center gap-2 md:gap-4">
-			<ThemeSwitch  className="hidden md:flex"/>
+			<ThemeSwitch className="hidden md:flex" />
 			<div class="hidden md:flex gap-2">
 				<a
 					href={links.github}
@@ -70,9 +71,9 @@
 					<DropdownMenu.Content class="bg-base-300 border-0 mt-4">
 						<DropdownMenu.Group>
 							<DropdownMenu.Item>
-								<ThemeSwitch className="flex gap-2" hasTitle/>
+								<ThemeSwitch className="flex gap-2" hasTitle />
 							</DropdownMenu.Item>
-							<hr class="my-2"/>
+							<hr class="my-2" />
 							<DropdownMenu.Item>
 								<a href={links.github} class="drop-item" target="_blank"><Github /> Github</a>
 							</DropdownMenu.Item>
@@ -97,7 +98,8 @@
 
 <svelte:window bind:scrollY={y} />
 
-<style lang="postcss">
+<style>
+	@import 'tailwindcss/theme' theme(reference);
 	.link-icon {
 		@apply flex h-min p-2 rounded-3xl gap-2 hover:bg-base-200 hover:text-base-content transition-all;
 	}

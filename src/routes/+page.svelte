@@ -89,7 +89,7 @@
 				{#each filteredProjects as project}
 					<div
 						class="w-full md:w-1/3 lg:w-1/4"
-						transition:scale={{ duration: 500, opacity: 0.5, easing: quintOut }}
+						transition:scale|global={{ duration: 500, opacity: 0.5, easing: quintOut }}
 					>
 						<div
 							class="h-96 bg-card text-card-foreground rounded-lg m-1 flex flex-col justify-between"
