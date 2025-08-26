@@ -55,7 +55,7 @@
 
 <div class="container">
 	<div>
-		<div class="h-16" />
+		<div class="h-16"></div>
 		<div class="flex flex-col gap-6">
 			<div class="p-8">
 				<SectionTitle title="Work Experience" subTitle="Dev" />
@@ -127,7 +127,7 @@
 			</div>
 		</li>
 	</ul> -->
-		<div class="h-16" />
+		<div class="h-16"></div>
 	</div>
 </div>
 

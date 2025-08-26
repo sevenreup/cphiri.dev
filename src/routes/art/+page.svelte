@@ -2,15 +2,21 @@
 	import { Config } from '$lib/config';
 	import { artCollection } from '$lib/data/art';
 	import { cn } from '$lib/utils';
-	import Img from '@zerodevx/svelte-img'
+	import Img from '@zerodevx/svelte-img';
 </script>
 
-<div class="h-16" />
+<div class="h-16"></div>
 <div
 	class="grid grid-flow-dense grid-cols-[repeat(2,1fr)] md:grid-cols-[repeat(5,1fr)] lg:grid-cols-[repeat(6,1fr)] w-full h-full"
 >
 	{#each artCollection as art}
-		<figure class={cn('item flex justify-center items-center', art.spanHorizontal && 'horizontal', art.spanVertical && 'vertical')}>
+		<figure
+			class={cn(
+				'item flex justify-center items-center',
+				art.spanHorizontal && 'horizontal',
+				art.spanVertical && 'vertical'
+			)}
+		>
 			<Img class="w-full h-full" src={art.image} alt={art.title} />
 		</figure>
 	{/each}

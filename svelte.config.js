@@ -1,5 +1,5 @@
 import adapter from '@sveltejs/adapter-auto';
-import { vitePreprocess } from '@sveltejs/kit/vite';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { mdsvex } from 'mdsvex';
 import highlighter from './highlighter.mjs';
 
@@ -11,9 +11,9 @@ const config = {
 		vitePreprocess(),
 		mdsvex({
 			extensions: ['.md', '.svx'],
-			highlight:{
-				highlighter,
-		   },
+			highlight: {
+				highlighter
+			}
 		})
 	],
 	extensions: ['.svelte', '.md', '.svx'],

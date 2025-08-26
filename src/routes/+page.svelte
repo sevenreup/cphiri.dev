@@ -26,9 +26,9 @@
 		}
 	];
 
-	let filteredProjects = projects;
+	let filteredProjects = $state(projects);
 
-	let selectedFilter = 'all';
+	let selectedFilter = $state('all');
 
 	function filterProjects(filter: string) {
 		selectedFilter = filter;
@@ -79,7 +79,7 @@
 										selectedFilter === filter.value
 								}
 							)}
-							on:click={() => filterProjects(filter.value)}>{filter.name}</button
+							onclick={() => filterProjects(filter.value)}>{filter.name}</button
 						>
 					{/each}
 				</div>
@@ -184,9 +184,7 @@
 				<p>Some of my illustrations.</p>
 			</div>
 			<div>
-				<a
-					href="/art"
-					class="btn btn-accent"
+				<a href="/art" class="btn btn-accent"
 					>View gallery <svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="16"
@@ -204,7 +202,7 @@
 	</div>
 </div>
 
-<div class="h-24" />
+<div class="h-24"></div>
 
 <svelte:head>
 	<title>{Config.title} | Work</title>

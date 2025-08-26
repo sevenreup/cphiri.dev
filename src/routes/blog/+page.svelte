@@ -2,13 +2,17 @@
 	import type { BlogData } from './+page';
 	import { page } from '$app/stores';
 	import { X as CloseIcon } from 'lucide-svelte';
-	export let data: BlogData;
+	interface Props {
+		data: BlogData;
+	}
+
+	let { data }: Props = $props();
 
 	const { posts } = data;
 </script>
 
 <div class="container">
-	<div class="h-16" />
+	<div class="h-16"></div>
 	<div class="flex flex-col gap-4 my-6">
 		<h1 class="text-6xl font-bold">Blog</h1>
 		<p class="text-base-content/70 font-title py-4 font-light md:text-lg xl:text-2xl">

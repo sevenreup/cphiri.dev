@@ -2,9 +2,13 @@
 	import { onMount } from 'svelte';
 	import { reverseThemeMap, themeMap, themes } from '$lib/themes';
 
-	let currentTheme = '';
-	export let className = '';
-	export let hasTitle = false;
+	let currentTheme = $state('');
+	interface Props {
+		className?: string;
+		hasTitle?: boolean;
+	}
+
+	let { className = '', hasTitle = false }: Props = $props();
 
 	onMount(() => {
 		if (typeof window !== 'undefined') {
@@ -37,7 +41,7 @@
 
 <button
 	aria-label="switch theme"
-	on:click={toggleTheme}
+	onclick={toggleTheme}
 	class="switcher text-base-content {hasTitle
 		? 'gap-4'
 		: 'relative h-9 w-9 rounded-full before:absolute before:inset-0 before:rounded-full before:border before:border-base-100 before:bg-base-300/75 before:bg-linear-to-b before:transition-transform before:duration-300'} hover:before:scale-105 active:duration-75 active:before:scale-95 lg:flex backdrop-blur {className}"
