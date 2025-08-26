@@ -4,7 +4,7 @@
 
 	let isAnimating = false;
 	let interval: any;
-	let show = true;
+	let show = $state(true);
 
 	setInterval(() => {
 		isAnimating = !isAnimating;
@@ -660,6 +660,7 @@
 </svg>
 
 <style lang="postcss">
+	@reference "tailwindcss";
 	.hair {
 		@apply dark:fill-white fill-black;
 	}

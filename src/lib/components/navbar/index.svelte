@@ -5,8 +5,8 @@
 	import ThemeSwitch from '../themeSwitch.svelte';
 	import { cn } from '$lib/utils';
 
-	let y = 0;
-	$: isScrolling = y > 0;
+	let y = $state(0);
+	let isScrolling = $derived(y > 0);
 
 	const links = {
 		twitter: 'https://twitter.com/sevenreup4ill',
@@ -99,10 +99,8 @@
 <svelte:window bind:scrollY={y} />
 
 <style>
-	@import 'tailwindcss/theme' theme(reference);
-	.link-icon {
-		@apply flex h-min p-2 rounded-3xl gap-2 hover:bg-base-200 hover:text-base-content transition-all;
-	}
+	@reference "../../../app.css";
+
 	.drop-item {
 		@apply flex gap-4;
 	}

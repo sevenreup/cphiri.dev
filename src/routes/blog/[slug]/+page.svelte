@@ -4,7 +4,11 @@
 	import { createPostOgUrl } from '../../../utils/posts';
 	import type { BlogPostData } from './+page';
 
-	export let data: BlogPostData;
+	interface Props {
+		data: BlogPostData;
+	}
+
+	let { data }: Props = $props();
 	let { title, description, date, tags } = data.meta;
 
 	const ogUrl = createPostOgUrl(data.slug);
@@ -12,7 +16,7 @@
 
 <div class="relative p-4">
 	<div class="max-w-3xl mx-auto">
-		<div class="h-16" />
+		<div class="h-16"></div>
 		<div class="flex flex-row flex-wrap items-center justify-between">
 			<div class="flex flex-row flex-wrap gap-2 my-4">
 				{#each tags as tag}
@@ -26,7 +30,7 @@
 			<span>Published - {date}</span>
 		</div>
 		<div class="prose md:prose-lg lg:prose-xl break-words max-w-none">
-			<svelte:component this={data.content} />
+			<data.content />
 		</div>
 	</div>
 </div>

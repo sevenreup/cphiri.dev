@@ -4,8 +4,8 @@ import { imagetools } from '@zerodevx/svelte-img/vite';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-	ssr: { external: ["@resvg/resvg-js"] },
-	plugins: [sveltekit(), imagetools(), tailwindcss(),],
+	ssr: { external: ['@resvg/resvg-js'] },
+	plugins: [sveltekit(), imagetools(), tailwindcss()],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	},

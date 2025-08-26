@@ -1,10 +1,15 @@
 <script lang="ts">
 	import { cn } from '$lib/utils';
 
-	export let name: string;
-	export let position: string;
-	export let meta: string;
-	export let body: string;
+	interface Props {
+		name: string;
+		position: string;
+		meta: string;
+		body: string;
+		children?: import('svelte').Snippet;
+	}
+
+	let { name, position, meta, body, children }: Props = $props();
 </script>
 
 <div class="flex items-start flex-col">
@@ -17,7 +22,7 @@
 					'aspect-square bg-base-300 text-base-content border border-base-100 rounded-xl'
 				)}
 			>
-				<slot />
+				{@render children?.()}
 			</div>
 			<div class="text-xl font-bold whitespace-pre-line">{name}</div>
 		</div>

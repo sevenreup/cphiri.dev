@@ -1,15 +1,20 @@
-<script>
+<script lang="ts">
 	import '../app.css';
 	import Navbar from '$lib/components/navbar/index.svelte';
 	import { Config } from '$lib/config';
 	import { personalSchema, serializeSchema } from '$lib/seo/ld';
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
 </script>
 
 <Navbar />
 
-<div class="h-16" />
-<slot />
-<div class="h-20" />
+<div class="h-16"></div>
+{@render children?.()}
+<div class="h-20"></div>
 
 <svelte:head>
 	<meta property="og:title" content={Config.title} />

@@ -1,23 +1,23 @@
-import type { ClassValue } from "clsx";
-import { clsx } from "clsx";
-import { cubicOut } from "svelte/easing";
-import { writable } from "svelte/store";
-import type { TransitionConfig } from "svelte/transition";
-import { twMerge } from "tailwind-merge";
+import type { ClassValue } from 'clsx';
+import { clsx } from 'clsx';
+import { cubicOut } from 'svelte/easing';
+import { writable } from 'svelte/store';
+import type { TransitionConfig } from 'svelte/transition';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
-export const isBrowser = typeof document !== "undefined";
+export const isBrowser = typeof document !== 'undefined';
 
 export function slugFromPath(path: string) {
-	return path.replace("/src/content/", "").replace(".md", "");
+	return path.replace('/src/content/', '').replace('.md', '');
 }
 
 export function hexToHsl(hex: string): [number, number, number] {
 	if (hex) {
-		const sanitizedHex = hex.replace("#", "");
+		const sanitizedHex = hex.replace('#', '');
 
 		const red = parseInt(sanitizedHex.substring(0, 2), 16);
 		const green = parseInt(sanitizedHex.substring(2, 4), 16);
@@ -68,7 +68,7 @@ export function hexToHsl(hex: string): [number, number, number] {
 
 export function hexToRgb(hex: string): [number, number, number] {
 	if (hex) {
-		const sanitizedHex = hex.replace("#", "");
+		const sanitizedHex = hex.replace('#', '');
 
 		const red = parseInt(sanitizedHex.substring(0, 2), 16);
 		const green = parseInt(sanitizedHex.substring(2, 4), 16);
@@ -80,7 +80,7 @@ export function hexToRgb(hex: string): [number, number, number] {
 }
 
 export function createCopyCodeButton() {
-	let codeString = "";
+	let codeString = '';
 	const copied = writable(false);
 	let copyTimeout = 0;
 
@@ -95,7 +95,7 @@ export function createCopyCodeButton() {
 	}
 
 	function setCodeString(node: HTMLElement) {
-		codeString = node.innerText.trim() ?? "";
+		codeString = node.innerText.trim() ?? '';
 	}
 
 	return {
@@ -113,7 +113,7 @@ export function updateTheme(activeTheme: string, path: string) {
 		}
 	});
 
-	const theme = path === "/themes" ? activeTheme : null;
+	const theme = path === '/themes' ? activeTheme : null;
 	if (theme) {
 		return document.body.classList.add(`theme-${theme}`);
 	}
@@ -131,13 +131,9 @@ export const flyAndScale = (
 	params: FlyAndScaleParams = { y: -8, x: 0, start: 0.95, duration: 150 }
 ): TransitionConfig => {
 	const style = getComputedStyle(node);
-	const transform = style.transform === "none" ? "" : style.transform;
+	const transform = style.transform === 'none' ? '' : style.transform;
 
-	const scaleConversion = (
-		valueA: number,
-		scaleA: [number, number],
-		scaleB: [number, number]
-	) => {
+	const scaleConversion = (valueA: number, scaleA: [number, number], scaleB: [number, number]) => {
 		const [minA, maxA] = scaleA;
 		const [minB, maxB] = scaleB;
 
@@ -147,13 +143,11 @@ export const flyAndScale = (
 		return valueB;
 	};
 
-	const styleToString = (
-		style: Record<string, number | string | undefined>
-	): string => {
+	const styleToString = (style: Record<string, number | string | undefined>): string => {
 		return Object.keys(style).reduce((str, key) => {
 			if (style[key] === undefined) return str;
 			return str + `${key}:${style[key]};`;
-		}, "");
+		}, '');
 	};
 
 	return {

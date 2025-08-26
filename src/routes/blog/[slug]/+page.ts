@@ -8,7 +8,7 @@ export async function load({ params }) {
 	return {
 		content,
 		meta: rawMetaToMeta(post.metadata),
-		slug: params.slug,
+		slug: params.slug
 	};
 }
 
