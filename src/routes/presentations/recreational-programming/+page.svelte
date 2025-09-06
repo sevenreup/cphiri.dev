@@ -516,6 +516,31 @@
       padding: 0.8rem;
       margin: 0.8rem 0;
     }
+
+    /* Make Tailwind headers much smaller on mobile */
+    :global(.reveal .text-6xl) {
+      font-size: 1.8rem !important;
+    }
+    
+    :global(.reveal .text-5xl) {
+      font-size: 1.5rem !important;
+    }
+    
+    :global(.reveal .text-4xl) {
+      font-size: 1.3rem !important;
+    }
+    
+    :global(.reveal .text-3xl) {
+      font-size: 1.1rem !important;
+    }
+    
+    :global(.reveal .text-2xl) {
+      font-size: 1rem !important;
+    }
+    
+    :global(.reveal .text-xl) {
+      font-size: 0.9rem !important;
+    }
   }
 
   @media (max-width: 480px) {
@@ -530,6 +555,31 @@
     .takeaway {
       padding: 0.5rem;
       margin: 0.5rem 0;
+    }
+
+    /* Even smaller headers on very small screens */
+    :global(.reveal .text-6xl) {
+      font-size: 1.5rem !important;
+    }
+    
+    :global(.reveal .text-5xl) {
+      font-size: 1.3rem !important;
+    }
+    
+    :global(.reveal .text-4xl) {
+      font-size: 1.1rem !important;
+    }
+    
+    :global(.reveal .text-3xl) {
+      font-size: 1rem !important;
+    }
+    
+    :global(.reveal .text-2xl) {
+      font-size: 0.9rem !important;
+    }
+    
+    :global(.reveal .text-xl) {
+      font-size: 0.8rem !important;
     }
   }
 
