@@ -53,7 +53,7 @@
           // Disable problematic features on mobile
           autoSlide: 0,
           autoSlideStoppable: true,
-          mouseWheel: false,
+          mouseWheel: true,
           hideInactiveCursor: true,
           hideCursorTime: 3000
         };
