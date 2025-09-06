@@ -1,4 +1,5 @@
 import type { PostMeta, PostMetaRaw, PostResponse } from '$lib/types/post';
+import { presentations } from '$lib/data/presentations';
 
 const formatTags = (tagRaw: string): string[] => {
 	const tags = tagRaw.split(',').map((tag) => tag.trim());
@@ -28,10 +29,31 @@ export const fetchMarkdownPosts = async (): Promise<PostResponse[]> => {
 				meta: rawMetaToMeta(metadata),
 				path: postPath,
 				slug: postPath.split('/').pop() ?? postPath,
-				url
+				url,
+				type: 'markdown' as const
 			};
 		})
 	);
 
 	return allPosts;
+};
+
+export const fetchPresentations = (): PostResponse[] => {
+	return presentations.map(presentation => ({
+		meta: rawMetaToMeta(presentation.metadata),
+		path: presentation.path,
+		slug: presentation.slug,
+		url: presentation.url,
+		type: 'presentation' as const
+	}));
+};
+
+export const fetchAllPosts = async (): Promise<PostResponse[]> => {
+	const markdownPosts = await fetchMarkdownPosts();
+	const presentationPosts = fetchPresentations();
+	
+	// Combine and sort by date
+	return [...markdownPosts, ...presentationPosts].sort((a, b) => {
+		return new Date(b.meta.date).getTime() - new Date(a.meta.date).getTime();
+	});
 };

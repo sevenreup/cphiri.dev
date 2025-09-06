@@ -6,60 +6,70 @@
 
   onMount(async () => {
     if (browser) {
-      // Dynamically import Reveal.js and plugins
-      const [
-        { default: Reveal },
-        { default: Markdown },
-        { default: Highlight },
-        { default: Notes }
-      ] = await Promise.all([
-        // @ts-ignore - Reveal.js doesn't have proper TypeScript declarations
-        import('reveal.js'),
-        // @ts-ignore
-        import('reveal.js/plugin/markdown/markdown.esm.js'),
-        // @ts-ignore
-        import('reveal.js/plugin/highlight/highlight.esm.js'),
-        // @ts-ignore
-        import('reveal.js/plugin/notes/notes.esm.js')
-      ]);
-
-      // Initialize Reveal.js with mobile-friendly settings
-      const deck = new Reveal(revealContainer, {
+      // Import Reveal.js and initialize
+      const { default: Reveal } = await import('reveal.js');
+      
+      // Mobile-optimized configuration
+      const config = {
+        // Core settings
         hash: true,
-        plugins: [Markdown, Highlight, Notes],
-        // Mobile-friendly configuration
-        touch: true,
-        loop: false,
-        rtl: false,
-        navigationMode: 'default',
-        controlsTutorial: true,
-        controlsLayout: 'bottom-right',
-        controlsBackArrows: 'faded',
+        controls: true,
         progress: true,
         center: true,
+        touch: true,
+        loop: false,
+        
+        // Mobile-optimized dimensions
+        width: '100%',
+        height: '100%',
+        margin: 0.02,
+        minScale: 0.2,
+        maxScale: 3.0,
+        
+        // Responsive behavior
+        embedded: false,
+        
+        // Mobile-specific settings
+        controlsLayout: 'bottom-right',
+        controlsBackArrows: 'faded',
+        
+        // Transitions
         transition: 'slide',
-        transitionSpeed: 'default',
+        transitionSpeed: 'fast',
         backgroundTransition: 'fade',
+        
+        // View distance for performance
         viewDistance: 3,
         mobileViewDistance: 2,
-        // Responsive settings
-        width: "100%",
-        height: "100%",
-        margin: 0.04,
-        minScale: 0.2,
-        maxScale: 2.0
-      });
+        
+        // Disable problematic features on mobile
+        autoSlide: 0,
+        autoSlideStoppable: true,
+        mouseWheel: false,
+        hideInactiveCursor: true,
+        hideCursorTime: 3000
+      };
 
+      const deck = new Reveal(revealContainer, config);
       await deck.initialize();
 
-      // Cleanup function - store reference for cleanup
-      const cleanupFn = () => {
+      // Force layout recalculation for mobile
+      const handleResize = () => {
+        setTimeout(() => {
+          deck.layout();
+        }, 100);
+      };
+
+      window.addEventListener('resize', handleResize);
+      window.addEventListener('orientationchange', handleResize);
+
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        window.removeEventListener('orientationchange', handleResize);
         if (deck) {
           deck.destroy();
         }
       };
-
-      return cleanupFn;
     }
   });
 </script>
@@ -72,595 +82,459 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   
   <!-- Reveal.js CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/black.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/black.min.css" />
 </svelte:head>
 
 <div class="reveal" bind:this={revealContainer}>
   <div class="slides">
-    <section data-markdown>
-      <textarea data-template>
-        ## Recreational Programming
-        <p style="text-align: center;">You guys are getting paid?</p>
-        
-        Note:
-        - Total presentation: 26 minutes + Q&A
-        - Props needed: Code examples for different styles, links to example creators' work, one tiny demo if feeling brave
-        - Start with energy and confidence
-        
-        ---
-        
-        ## 
-        **"Show of hands: How many of you learned programming because it was fun?"**
-       
-        
-        Note:
-        - Quick poll reveals the gap. Transition: "Today we're exploring how to get that spark back through recreational programming."
-        - 3 minutes for this section
-        - Wait for actual hands to go up, then comment on the drop-off
-        - This sets up the core problem we're solving
-        
-        ---
-        
-        # Part 1: What is Recreational Programming?
-        
-        Note:
-        - 4 minutes total for this entire section
-        - This foundation is crucial - don't rush it
-        
-        ---
-        
-        ## Definition
-        <div class="center">
-        Programming for the joy of programming itself - not for work, not for money, not for external requirements.
-        </div>
-        
-        Note:
-        - Emphasize "joy" - this is the key word
-        - Contrast with obligation-driven programming
-        
-        ---
-        
-        ## What it looks like:
-        - Building things because you're curious how they work
-        - Exploring new languages just to see what they feel like
-        - Solving problems that only exist in your head
-        - Creating tools for problems you don't actually have
-        - Writing code that makes you smile
-        
-        Note:
-        - Give concrete examples if possible
-        - "Makes you smile" usually gets a reaction
-        
-        ---
-        
-        ## What it's NOT:
-        - Side hustles or potential startups
-        - Skill building for career advancement (though that happens anyway)
-        - Following tutorials step-by-step
-        - Grinding through coding challenges for interviews
-        - Building what others expect you to build
-        
-        <div class="takeaway">
-        <strong>The key distinction:</strong> Internal motivation vs. external pressure
-        </div>
-        
-        Note:
-        - Be careful not to shame these activities
-        - Emphasize the "internal vs external" distinction
-        - Acknowledge that skill building happens anyway as a side effect
-        
-        ---
-        
-        ## Why it matters:
-        - Prevents burnout by reconnecting with intrinsic motivation
-        - Develops intuition through low-stakes exploration
-        - Maintains long-term passion for the craft
-        - Often leads to unexpected breakthroughs and learning
-        
-        Note:
-        - "Burnout prevention" resonates with most developers
-        - "Low-stakes" is key - no pressure to succeed
-        
-        ---
-        
-        # Part 2: The Recreational Programming Spectrum
-        
-        Note:
-        - 10 minutes for this section
-        - These are archetypes, not rigid categories
-        - People can blend multiple styles
-        
-        ---
-        
-        ## Style 1: The Live Explorer
-        - Builds in public through streams or blogs
-        - Shows the messy process: dead ends, bugs, restarts
-        - Community becomes accountability and energy source
-        - Projects range from practical tools to pure experiments
-        
-        Note:
-        - Think Tsoding Daily, live coding streamers
-        - Emphasize "messy process" - this is key
-        
-        ---
-        
-        ## Style 2: The Deep Diver
-        - Obsesses over understanding how things really work
-        - Builds toy versions of complex systems (compilers, databases, games)
-        - Values learning over shipping
-        - Often has multiple "educational" implementations
-        
-        Note:
-        - Casey Muratori, Ben Eater types
-        - "Learning over shipping" is crucial mindset
-        
-        ---
-        
-        ## Style 3: The Creative Technologist
-        - Uses code as artistic medium
-        - Generative art, music synthesis, interactive installations
-        - Technology serves creative vision
-        - Often blends programming with other disciplines
-        
-        Note:
-        - Processing, openFrameworks community
-        - Show examples if you have them ready
-        
-        ---
-        
-        ## Style 4: The Problem Solver
-        - Scratches personal itches with code
-        - Tools that solve tiny annoying problems
-        - "Good enough" solutions that work for them
-        - Often accidentally builds useful things
-        
-        Note:
-        - This resonates with most developers
-        - "Accidentally builds useful things" - many startups begin this way
-        
-        ---
-        
-        ## Style 5: The Language Explorer
-        - Constantly trying new languages and paradigms
-        - Implements same concepts across different languages
-        - Drawn to unusual or experimental languages
-        - Code as intellectual curiosity
-        
-        Note:
-        - Polyglot programmers
-        - Same problem, different language approach
-        
-        ---
-        
-        # Part 3: Common Patterns Across All Styles
-        ## What they all share
-        
-        Note:
-        - 7 minutes for this section
-        - These patterns are what make recreational programming work
-        
-        ---
-        
-        ## Permission to Build "Useless" Things
-        - No business case required
-        - Curiosity is sufficient justification
-        - Failed experiments still teach valuable lessons
-        
-        <div class="takeaway">
-        <strong>Key insight:</strong> ROI doesn't apply to recreational programming
-        </div>
-        
-        Note:
-        - "Useless" in quotes - they're not really useless
-        - This permission is often the hardest thing for developers to give themselves
-        
-        ---
-        
-        ## Follow Energy, Not Plans
-        - Switch projects when excitement fades
-        - Multiple abandoned repos are exploration, not failure
-        - Boredom is data about what interests you
-        
-        <div class="takeaway">
-        <strong>Key insight:</strong> Boredom is data, not defeat
-        </div>
-        
-        Note:
-        - This contradicts traditional project management wisdom
-        - "Boredom is data" - powerful reframe
-        
-        ---
-        
-        ## Document the Journey
-        - Share process, not just results
-        - Teaching forces deeper understanding
-        - Creates connection with others on similar paths
-        
-        <div class="takeaway">
-        <strong>Key insight:</strong> Narrate your decisions
-        </div>
-        
-        Note:
-        - Even if "audience" is just your future self
-        - Process documentation is more valuable than perfect results
-        
-        ---
-        
-        ## Embrace the Learning Process
-        - Beginner's mind in new domains
-        - Comfortable with not knowing
-        - Process over product
-        
-        <div class="takeaway">
-        <strong>Key insight:</strong> Progress over perfection
-        </div>
-        
-        Note:
-        - "Beginner's mind" is a Zen concept worth explaining briefly
-        - This is counterintuitive for senior developers
-        
-        ---
-        
-        # Part 4: Your Personal Programming Playground
-        ## Setting Up for Success
-        
-        Note:
-        - 6 minutes for this section
-        - This is the practical implementation advice
-        
-        ---
-        
-        ## The Environment
-        - Dedicated "experiments" folder/repo
-        - No production concerns: minimal setup, no CI/CD pressure
-        - Quick project initialization scripts
-        - Version control optional
-        
-        Note:
-        - Emphasize "no production concerns" - this reduces friction
-        - Quick setup is crucial for maintaining momentum
-        
-        ---
-        
-        ## The Approaches You Can Try
-        - <span class="highlight">Weekly Experiments</span> (2-4 hours exploring one new thing)
-        - <span class="highlight">Scratch-Built Challenges</span> (Build toy versions of tools you use)
-        - <span class="highlight">Itch-Scratching Projects</span> (Solve your own annoying problems)
-        - <span class="highlight">Teaching Projects</span> (Build something while explaining it)
-        - <span class="highlight">Cross-Language Challenges</span> (Same problem, different languages)
-        
-        Note:
-        - These are starting points, not rigid rules
-        - 2-4 hours is long enough to get somewhere, short enough to not feel overwhelming
-        
-        ---
-        
-        ## The Mindset Shifts
-        - <span class="highlight">"What if..."</span> instead of <span class="highlight">"I should..."</span>
-        - Progress over perfection
-        - Learning over shipping
-        - Curiosity over productivity
-        
-        Note:
-        - "What if" vs "I should" is a powerful language shift
-        - These mindset shifts are often harder than the technical aspects
-        
-        ---
-        
-        # Part 5: Real Examples in the Wild
-        ## Here are programmers embodying these different styles
-        
-        Note:
-        - 4 minutes for this section
-        - Have links ready if doing this live
-        - These are inspirational examples, not people to copy exactly
-        
-        ---
-        ## Zikani Nyirenda - *The Polyglot Explorer*
-
-        - Experiments across Go, Rust, Python, JavaScript, Kotlin
-        - Perfect example of "what if I built this in X language?" approach
-
-        ---
-        ## Jeremiah Chienda (liwoo) - *The Full-Stack Experimenter*
-
-        - Creates diverse projects from React components to API backends
-        - Explores different architectural patterns and frameworks
-        - Builds tools that solve real problems while learning new technologies
-        - Shows how recreational programming can span the entire tech stack
-
-        ---
-        
-        ## Tsoding Daily - *The Live Explorer*
-        - Streams 4+ hours daily building random projects from scratch
-        - Built his own text editors, programming languages, ray tracers
-        - Shows complete process including failures and debugging
-        - "Let's see what happens if..." approach to everything
-        
-        Note:
-        - Tsoding shows the "messy process" beautifully
-        - Emphasize the fearless experimentation
-        
-        ---
-        
-        ## ThePrimeagen - *The High-Energy Problem Solver*
-        - Creates CLI tools and Neovim plugins for personal workflow optimization
-        - Infectious enthusiasm for dev tools and performance
-        - Reacts to and critiques other developers' code/approaches
-        - Makes optimization and tooling feel like extreme sports
-        
-        Note:
-        - Prime's energy is infectious
-        - He makes mundane dev tools exciting
-        
-        ---
-        
-        ## Casey Muratori - *The Systems Deep Diver*
-        - Handmade Hero: Building a complete game from scratch on stream
-        - Explains every single line of code and system design decision
-        - No libraries, understanding everything from first principles
-        - Demonstrates that you can build modern software without frameworks
-        
-        Note:
-        - Casey's Handmade Hero is legendary for education
-        - First principles approach is inspiring
-        
-        ---
-        
-        ## Devine Lu Linvega - *The Minimalist Creative*
-        - Lives on a sailboat, codes minimal tools for digital art
-        - Builds everything in a few hundred lines of C
-        - Creates programming languages, graphics engines, music software
-        - Constraint-driven creativity: what can you build with almost nothing?
-        
-        Note:
-        - Devine's constraints breed creativity
-        - Living on a sailboat adds romantic appeal
-        
-        ---
-        
-        ## Ben Eater - *The Educational Builder*
-        - Builds computers on breadboards, explains every component
-        - Creates video series on how CPUs, memory, and networks actually work
-        - Takes months to build what you could buy for $5
-        - Makes hardware fundamentals accessible and fascinating
-        
-        Note:
-        - Ben makes hardware accessible to software developers
-        - "Takes months to build what costs $5" gets laughs
-        
-        ---
-        
-        ## Jonathan Blow - *The Philosophical Craftsperson*
-        - Created indie games (Braid, The Witness) as personal artistic statements
-        - Designing his own programming language (Jai) for game development
-        - Critiques industry trends, advocates for craftsmanship
-        - Programming as a form of intellectual and artistic expression
-        
-        Note:
-        - Jonathan thinks deeply about tools and languages
-        - Programming as art resonates with many
-        
-        ---
-        
-        ## Suz Hinton - *The Creative Hardware Hacker*
-        - Live codes music and visuals on Twitch
-        - Builds IoT projects and interactive art installations
-        - Combines programming with electronics, music, and performance
-        - Shows programming as a creative, interdisciplinary medium
-        
-        Note:
-        - Suz blends multiple disciplines beautifully
-        - Live coding music is fascinating to most people
-        
-        ---
-        
-        ## Dan Luu - *The Deep Technical Investigator*
-        - Writes detailed blog posts investigating performance mysteries
-        - Benchmarks everything: keyboards, terminals, programming languages
-        - Turns curiosity about "why is X slow?" into multi-thousand word research
-        - Demonstrates how recreational investigation can uncover industry-wide issues
-        
-        <div class="center small">
-        <strong>Each represents a different path back to programming joy</strong>
-        </div>
-        
-        Note:
-        - Dan turns curiosity into deep research
-        - Shows how recreational work can have industry impact
-        
-        ---
-        
-        ## Closing Challenge
-        Pick one experiment:
-        1. Build the worst possible version of a tool you use daily
-        2. Spend 2 hours with a language you've been curious about
-        3. Document yourself solving a small problem
-        4. Fork an interesting project and mess with it
-        5. Try live coding or streaming your process
-        
-        <div class="takeaway">
-        <strong>The only rule:</strong> Stop if it stops being fun.
-        </div>
-        
-        Note:
-        - 2 minutes for this section
-        - "Worst possible version" gets laughs and removes pressure
-        - Emphasize "stop if it stops being fun" - this is crucial
-        
-        ---
-        
-        ## Final Thought
-        <div class="center">
-        "The goal isn't to become any of these programmers. It's to remember why you started coding and keep that curiosity alive alongside your career."
-        </div>
-        
-        Note:
-        - End on this inspirational note
-        - Pause after this for effect
-        - Open to Q&A
-        - Thank audience for their energy and participation
-      </textarea>
+    
+    <!-- Title Slide -->
+    <section>
+      <h1>Recreational Programming</h1>
+      <p class="subtitle">You guys are getting paid?</p>
     </section>
+
+    <!-- Opening Question -->
+    <section>
+      <h2>Show of hands:</h2>
+      <p class="big-question">How many of you learned programming because it was fun?</p>
+    </section>
+
+    <!-- Part 1: What is Recreational Programming? -->
+    <section>
+      <h1>Part 1</h1>
+      <h2>What is Recreational Programming?</h2>
+    </section>
+
+    <!-- Definition -->
+    <section>
+      <h2>Definition</h2>
+      <div class="center-content">
+        <p class="definition">Programming for the joy of programming itself - not for work, not for money, not for external requirements.</p>
+      </div>
+    </section>
+
+    <!-- What it looks like -->
+    <section>
+      <h2>What it looks like:</h2>
+      <ul>
+        <li>Building things because you're curious how they work</li>
+        <li>Exploring new languages just to see what they feel like</li>
+        <li>Solving problems that only exist in your head</li>
+        <li>Creating tools for problems you don't actually have</li>
+        <li>Writing code that makes you smile</li>
+      </ul>
+    </section>
+
+    <!-- What it's NOT -->
+    <section>
+      <h2>What it's NOT:</h2>
+      <ul>
+        <li>Side hustles or potential startups</li>
+        <li>Skill building for career advancement</li>
+        <li>Following tutorials step-by-step</li>
+        <li>Grinding through coding challenges for interviews</li>
+        <li>Building what others expect you to build</li>
+      </ul>
+      <div class="takeaway">
+        <strong>The key distinction:</strong> Internal motivation vs. external pressure
+      </div>
+    </section>
+
+    <!-- Why it matters -->
+    <section>
+      <h2>Why it matters:</h2>
+      <ul>
+        <li>Prevents burnout by reconnecting with intrinsic motivation</li>
+        <li>Develops intuition through low-stakes exploration</li>
+        <li>Maintains long-term passion for the craft</li>
+        <li>Often leads to unexpected breakthroughs and learning</li>
+      </ul>
+    </section>
+
+    <!-- Part 2 -->
+    <section>
+      <h1>Part 2</h1>
+      <h2>The Recreational Programming Spectrum</h2>
+    </section>
+
+    <!-- Style 1: Live Explorer -->
+    <section>
+      <h2>Style 1: The Live Explorer</h2>
+      <ul>
+        <li>Builds in public through streams or blogs</li>
+        <li>Shows the messy process: dead ends, bugs, restarts</li>
+        <li>Community becomes accountability and energy source</li>
+        <li>Projects range from practical tools to pure experiments</li>
+      </ul>
+    </section>
+
+    <!-- Style 2: Deep Diver -->
+    <section>
+      <h2>Style 2: The Deep Diver</h2>
+      <ul>
+        <li>Obsesses over understanding how things really work</li>
+        <li>Builds toy versions of complex systems</li>
+        <li>Values learning over shipping</li>
+        <li>Often has multiple "educational" implementations</li>
+      </ul>
+    </section>
+
+    <!-- Style 3: Creative Technologist -->
+    <section>
+      <h2>Style 3: The Creative Technologist</h2>
+      <ul>
+        <li>Uses code as artistic medium</li>
+        <li>Generative art, music synthesis, interactive installations</li>
+        <li>Technology serves creative vision</li>
+        <li>Often blends programming with other disciplines</li>
+      </ul>
+    </section>
+
+    <!-- Style 4: Problem Solver -->
+    <section>
+      <h2>Style 4: The Problem Solver</h2>
+      <ul>
+        <li>Scratches personal itches with code</li>
+        <li>Tools that solve tiny annoying problems</li>
+        <li>"Good enough" solutions that work for them</li>
+        <li>Often accidentally builds useful things</li>
+      </ul>
+    </section>
+
+    <!-- Style 5: Language Explorer -->
+    <section>
+      <h2>Style 5: The Language Explorer</h2>
+      <ul>
+        <li>Constantly trying new languages and paradigms</li>
+        <li>Implements same concepts across different languages</li>
+        <li>Drawn to unusual or experimental languages</li>
+        <li>Code as intellectual curiosity</li>
+      </ul>
+    </section>
+
+    <!-- Part 3 -->
+    <section>
+      <h1>Part 3</h1>
+      <h2>Common Patterns Across All Styles</h2>
+    </section>
+
+    <!-- Permission to Build Useless Things -->
+    <section>
+      <h2>Permission to Build "Useless" Things</h2>
+      <ul>
+        <li>No business case required</li>
+        <li>Curiosity is sufficient justification</li>
+        <li>Failed experiments still teach valuable lessons</li>
+      </ul>
+      <div class="takeaway">
+        <strong>Key insight:</strong> ROI doesn't apply to recreational programming
+      </div>
+    </section>
+
+    <!-- Follow Energy -->
+    <section>
+      <h2>Follow Energy, Not Plans</h2>
+      <ul>
+        <li>Switch projects when excitement fades</li>
+        <li>Multiple abandoned repos are exploration, not failure</li>
+        <li>Boredom is data about what interests you</li>
+      </ul>
+      <div class="takeaway">
+        <strong>Key insight:</strong> Boredom is data, not defeat
+      </div>
+    </section>
+
+    <!-- Document Journey -->
+    <section>
+      <h2>Document the Journey</h2>
+      <ul>
+        <li>Share process, not just results</li>
+        <li>Teaching forces deeper understanding</li>
+        <li>Creates connection with others on similar paths</li>
+      </ul>
+      <div class="takeaway">
+        <strong>Key insight:</strong> Narrate your decisions
+      </div>
+    </section>
+
+    <!-- Learning Process -->
+    <section>
+      <h2>Embrace the Learning Process</h2>
+      <ul>
+        <li>Beginner's mind in new domains</li>
+        <li>Comfortable with not knowing</li>
+        <li>Process over product</li>
+      </ul>
+      <div class="takeaway">
+        <strong>Key insight:</strong> Progress over perfection
+      </div>
+    </section>
+
+    <!-- Part 4 -->
+    <section>
+      <h1>Part 4</h1>
+      <h2>Your Personal Programming Playground</h2>
+    </section>
+
+    <!-- Environment -->
+    <section>
+      <h2>The Environment</h2>
+      <ul>
+        <li>Dedicated "experiments" folder/repo</li>
+        <li>No production concerns: minimal setup, no CI/CD pressure</li>
+        <li>Quick project initialization scripts</li>
+        <li>Version control optional</li>
+      </ul>
+    </section>
+
+    <!-- Approaches -->
+    <section>
+      <h2>Approaches You Can Try</h2>
+      <ul>
+        <li><span class="highlight">Weekly Experiments</span> (2-4 hours exploring one new thing)</li>
+        <li><span class="highlight">Scratch-Built Challenges</span> (Build toy versions of tools you use)</li>
+        <li><span class="highlight">Itch-Scratching Projects</span> (Solve your own annoying problems)</li>
+        <li><span class="highlight">Teaching Projects</span> (Build something while explaining it)</li>
+        <li><span class="highlight">Cross-Language Challenges</span> (Same problem, different languages)</li>
+      </ul>
+    </section>
+
+    <!-- Mindset Shifts -->
+    <section>
+      <h2>The Mindset Shifts</h2>
+      <ul>
+        <li><span class="highlight">"What if..."</span> instead of <span class="highlight">"I should..."</span></li>
+        <li>Progress over perfection</li>
+        <li>Learning over shipping</li>
+        <li>Curiosity over productivity</li>
+      </ul>
+    </section>
+
+    <!-- Part 5 -->
+    <section>
+      <h1>Part 5</h1>
+      <h2>Real Examples in the Wild</h2>
+    </section>
+
+    <!-- Local Examples -->
+    <section>
+      <h2>Zikani Nyirenda - <em>The Polyglot Explorer</em></h2>
+      <ul>
+        <li>Experiments across Go, Rust, Python, JavaScript, Kotlin</li>
+        <li>Perfect example of "what if I built this in X language?" approach</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Jeremiah Chienda (liwoo) - <em>The Full-Stack Experimenter</em></h2>
+      <ul>
+        <li>Creates diverse projects from React components to API backends</li>
+        <li>Explores different architectural patterns and frameworks</li>
+        <li>Builds tools that solve real problems while learning new technologies</li>
+        <li>Shows how recreational programming can span the entire tech stack</li>
+      </ul>
+    </section>
+
+    <!-- Global Examples -->
+    <section>
+      <h2>Tsoding Daily - <em>The Live Explorer</em></h2>
+      <ul>
+        <li>Streams 4+ hours daily building random projects from scratch</li>
+        <li>Built his own text editors, programming languages, ray tracers</li>
+        <li>Shows complete process including failures and debugging</li>
+        <li>"Let's see what happens if..." approach to everything</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>ThePrimeagen - <em>The High-Energy Problem Solver</em></h2>
+      <ul>
+        <li>Creates CLI tools and Neovim plugins for personal workflow optimization</li>
+        <li>Infectious enthusiasm for dev tools and performance</li>
+        <li>Reacts to and critiques other developers' code/approaches</li>
+        <li>Makes optimization and tooling feel like extreme sports</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Casey Muratori - <em>The Systems Deep Diver</em></h2>
+      <ul>
+        <li>Handmade Hero: Building a complete game from scratch on stream</li>
+        <li>Explains every single line of code and system design decision</li>
+        <li>No libraries, understanding everything from first principles</li>
+        <li>Demonstrates that you can build modern software without frameworks</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Ben Eater - <em>The Educational Builder</em></h2>
+      <ul>
+        <li>Builds computers on breadboards, explains every component</li>
+        <li>Creates video series on how CPUs, memory, and networks actually work</li>
+        <li>Takes months to build what you could buy for $5</li>
+        <li>Makes hardware fundamentals accessible and fascinating</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Dan Luu - <em>The Deep Technical Investigator</em></h2>
+      <ul>
+        <li>Writes detailed blog posts investigating performance mysteries</li>
+        <li>Benchmarks everything: keyboards, terminals, programming languages</li>
+        <li>Turns curiosity about "why is X slow?" into multi-thousand word research</li>
+        <li>Demonstrates how recreational investigation can uncover industry-wide issues</li>
+      </ul>
+      <p class="small center-content"><strong>Each represents a different path back to programming joy</strong></p>
+    </section>
+
+    <!-- Closing Challenge -->
+    <section>
+      <h2>Closing Challenge</h2>
+      <p>Pick one experiment:</p>
+      <ol>
+        <li>Build the worst possible version of a tool you use daily</li>
+        <li>Spend 2 hours with a language you've been curious about</li>
+        <li>Document yourself solving a small problem</li>
+        <li>Fork an interesting project and mess with it</li>
+        <li>Try live coding or streaming your process</li>
+      </ol>
+      <div class="takeaway">
+        <strong>The only rule:</strong> Stop if it stops being fun.
+      </div>
+    </section>
+
+    <!-- Final Thought -->
+    <section>
+      <h2>Final Thought</h2>
+      <div class="center-content">
+        <p class="final-quote">"The goal isn't to become any of these programmers. It's to remember why you started coding and keep that curiosity alive alongside your career."</p>
+      </div>
+    </section>
+
   </div>
 </div>
 
 <style>
-  /* Container styles */
+  /* Mobile-first responsive design */
   .reveal {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
-  /* Base slide styles */
-  :global(.reveal .slides section) {
-    text-align: left;
-    padding: 40px;
-    box-sizing: border-box;
+  /* Typography scaling */
+  :global(.reveal h1) {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    margin-bottom: 1rem;
   }
-  
-  :global(.reveal h1),
-  :global(.reveal h2),
-  :global(.reveal h3) {
+
+  :global(.reveal h2) {
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    margin-bottom: 0.8rem;
+  }
+
+  :global(.reveal p) {
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    line-height: 1.4;
+    margin-bottom: 1rem;
+  }
+
+  :global(.reveal li) {
+    font-size: clamp(0.8rem, 2.2vw, 1rem);
+    line-height: 1.4;
+    margin: 0.3rem 0;
+  }
+
+  /* Custom classes */
+  .subtitle {
+    font-size: clamp(1rem, 3vw, 1.5rem) !important;
+    color: #888;
     text-align: center;
-    margin-bottom: 1em;
   }
-  
-  :global(.reveal .center) {
+
+  .big-question {
+    font-size: clamp(1.1rem, 3.5vw, 1.8rem) !important;
+    font-weight: bold;
     text-align: center;
-  }
-  
-  :global(.reveal .small) {
-    font-size: 0.8em;
-  }
-  
-  :global(.reveal .highlight) {
     color: #42affa;
   }
-  
-  :global(.reveal .takeaway) {
+
+  .definition {
+    font-size: clamp(1rem, 3vw, 1.4rem) !important;
+    font-style: italic;
+    text-align: center;
+    color: #ccc;
     background: rgba(66, 175, 250, 0.1);
-    padding: 20px;
-    border-left: 5px solid #42affa;
-    margin: 20px 0;
-  }
-  
-  /* Fix content overflow */
-  :global(.reveal .slides section) {
-    overflow-y: auto;
-    max-height: 90vh;
-  }
-  
-  :global(.reveal li) {
-    font-size: 0.85em;
-    line-height: 1.3;
-    margin: 0.2em 0;
-  }
-  
-  :global(.reveal ol li) {
-    font-size: 0.85em;
-    line-height: 1.3;
-    margin: 0.2em 0;
+    padding: 1rem;
+    border-radius: 8px;
   }
 
-  /* Mobile-specific styles */
+  .center-content {
+    text-align: center;
+  }
+
+  :global(.reveal .highlight) {
+    color: #42affa;
+    font-weight: bold;
+  }
+
+  .takeaway {
+    background: rgba(66, 175, 250, 0.1);
+    padding: clamp(0.8rem, 2vw, 1.5rem);
+    border-left: 4px solid #42affa;
+    margin: 1rem 0;
+    font-size: clamp(0.85rem, 2.2vw, 1.1rem);
+  }
+
+  .final-quote {
+    font-size: clamp(1rem, 3vw, 1.4rem) !important;
+    font-style: italic;
+    color: #42affa;
+    background: rgba(66, 175, 250, 0.1);
+    padding: 2rem;
+    border-radius: 8px;
+  }
+
+  /* Mobile optimizations */
   @media (max-width: 768px) {
     :global(.reveal .slides section) {
-      padding: 20px;
-      font-size: 0.9em;
+      padding: 1rem !important;
     }
-    
-    :global(.reveal h1) {
-      font-size: 1.8em;
+
+    :global(.reveal ul, .reveal ol) {
+      margin-left: 1rem;
     }
-    
-    :global(.reveal h2) {
-      font-size: 1.5em;
-    }
-    
-    :global(.reveal h3) {
-      font-size: 1.2em;
-    }
-    
-    :global(.reveal li) {
-      font-size: 0.8em;
-      line-height: 1.4;
-      margin: 0.3em 0;
-    }
-    
-    :global(.reveal .takeaway) {
-      padding: 15px;
-      margin: 15px 0;
-      font-size: 0.9em;
+
+    .takeaway {
+      padding: 0.8rem;
+      margin: 0.8rem 0;
     }
   }
 
-  /* Small mobile devices */
   @media (max-width: 480px) {
     :global(.reveal .slides section) {
-      padding: 15px;
-      font-size: 0.8em;
+      padding: 0.5rem !important;
     }
-    
-    :global(.reveal h1) {
-      font-size: 1.6em;
-      margin-bottom: 0.8em;
+
+    :global(.reveal ul, .reveal ol) {
+      margin-left: 0.5rem;
     }
-    
-    :global(.reveal h2) {
-      font-size: 1.3em;
-      margin-bottom: 0.8em;
-    }
-    
-    :global(.reveal h3) {
-      font-size: 1.1em;
-      margin-bottom: 0.8em;
-    }
-    
-    :global(.reveal li) {
-      font-size: 0.75em;
-      line-height: 1.5;
-      margin: 0.4em 0;
-    }
-    
-    :global(.reveal .takeaway) {
-      padding: 12px;
-      margin: 12px 0;
-      font-size: 0.85em;
+
+    .takeaway {
+      padding: 0.5rem;
+      margin: 0.5rem 0;
     }
   }
 
-  /* Landscape mobile orientation */
-  @media (max-width: 768px) and (orientation: landscape) {
-    :global(.reveal .slides section) {
-      padding: 10px 20px;
-      font-size: 0.85em;
-    }
-    
-    :global(.reveal li) {
-      font-size: 0.75em;
-    }
-  }
-
-  /* Touch-friendly navigation hints */
+  /* Controls and UI */
   @media (max-width: 768px) {
     :global(.reveal .controls) {
-      bottom: 20px !important;
-      right: 20px !important;
+      bottom: 1rem !important;
+      right: 1rem !important;
     }
-    
-    :global(.reveal .progress) {
-      height: 4px !important;
-    }
-  }
 
-  /* Dark mode support */
-  @media (prefers-color-scheme: dark) {
-    :global(.reveal .takeaway) {
-      background: rgba(66, 175, 250, 0.2);
-      border-left-color: #42affa;
+    :global(.reveal .progress) {
+      height: 3px !important;
     }
   }
 </style>

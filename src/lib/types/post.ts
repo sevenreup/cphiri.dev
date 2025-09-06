@@ -19,4 +19,5 @@ export type PostResponse = {
 	path: string;
 	slug: string;
 	url: string;
+	type: 'markdown' | 'presentation';
 };

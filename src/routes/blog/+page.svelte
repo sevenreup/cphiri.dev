@@ -30,24 +30,30 @@
 	</div>
 	<ul class="list-none w-full gap-2 flex flex-col">
 		{#each posts as post}
-			<a href={post.url}>
-				<li class="group w-full p-4 flex flex-col gap-1">
-					<div class="flex flex-row flex-wrap gap-1">
-						{#each post.meta.tags as tag}
-							<a
-								class="bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded-full"
-								data-sveltekit-reload
-								href={`${$page.url.pathname}?tag=${tag}`}>{tag}</a
-							>
-						{/each}
-					</div>
+			<li class="group w-full p-4 flex flex-col gap-1">
+				<div class="flex flex-row flex-wrap gap-1 items-center">
+					{#if post.type === 'presentation'}
+						<span class="bg-blue-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
+							Presentation
+						</span>
+					{/if}
+					{#each post.meta.tags as tag}
+						<a
+							class="bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded-full hover:bg-gray-300 transition-colors"
+							data-sveltekit-reload
+							href={`${$page.url.pathname}?tag=${tag}`}
+							onclick={(e) => e.stopPropagation()}
+						>{tag}</a>
+					{/each}
+				</div>
+				<a href={post.url} class="block">
 					<h2 class="text-3xl group-hover:underline">{post.meta.title}</h2>
 					<p class="text-xl font-light">{post.meta.description}</p>
 					<div class="">
 						<span>{post.meta.date}</span>
 					</div>
-				</li>
-			</a>
+				</a>
+			</li>
 		{/each}
 	</ul>
 </div>
