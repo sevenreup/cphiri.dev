@@ -1,76 +1,93 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { browser } from '$app/environment';
+  // Import Reveal.js from npm package
+  import 'reveal.js/dist/reveal.css';
+  import 'reveal.js/dist/theme/black.css';
 
   let revealContainer: HTMLDivElement;
 
-  onMount(async () => {
-    if (browser) {
-      // Import Reveal.js and initialize
-      const { default: Reveal } = await import('reveal.js');
-      
-      // Mobile-optimized configuration
-      const config = {
-        // Core settings
-        hash: true,
-        controls: true,
-        progress: true,
-        center: true,
-        touch: true,
-        loop: false,
+  onMount(() => {
+    let deck: any;
+    let handleResize: () => void;
+    
+    const initializeReveal = async () => {
+      if (browser) {
+        // Import Reveal.js and initialize
+        // @ts-ignore
+        const { default: Reveal } = await import('reveal.js');
         
-        // Mobile-optimized dimensions
-        width: '100%',
-        height: '100%',
-        margin: 0.02,
-        minScale: 0.2,
-        maxScale: 3.0,
-        
-        // Responsive behavior
-        embedded: false,
-        
-        // Mobile-specific settings
-        controlsLayout: 'bottom-right',
-        controlsBackArrows: 'faded',
-        
-        // Transitions
-        transition: 'slide',
-        transitionSpeed: 'fast',
-        backgroundTransition: 'fade',
-        
-        // View distance for performance
-        viewDistance: 3,
-        mobileViewDistance: 2,
-        
-        // Disable problematic features on mobile
-        autoSlide: 0,
-        autoSlideStoppable: true,
-        mouseWheel: false,
-        hideInactiveCursor: true,
-        hideCursorTime: 3000
-      };
+        // Mobile-optimized configuration
+        const config = {
+          // Core settings
+          hash: true,
+          controls: true,
+          progress: true,
+          center: true,
+          touch: true,
+          loop: false,
+          
+          // Mobile-optimized dimensions
+          width: '100%',
+          height: '100%',
+          margin: 0.02,
+          minScale: 0.2,
+          maxScale: 3.0,
+          
+          // Responsive behavior
+          embedded: false,
+          
+          // Mobile-specific settings
+          controlsLayout: 'bottom-right',
+          controlsBackArrows: 'faded',
+          
+          // Transitions
+          transition: 'slide',
+          transitionSpeed: 'fast',
+          backgroundTransition: 'fade',
+          
+          // View distance for performance
+          viewDistance: 3,
+          mobileViewDistance: 2,
+          
+          // Disable problematic features on mobile
+          autoSlide: 0,
+          autoSlideStoppable: true,
+          mouseWheel: false,
+          hideInactiveCursor: true,
+          hideCursorTime: 3000
+        };
 
-      const deck = new Reveal(revealContainer, config);
-      await deck.initialize();
+        deck = new Reveal(revealContainer, config);
+        await deck.initialize();
 
-      // Force layout recalculation for mobile
-      const handleResize = () => {
-        setTimeout(() => {
-          deck.layout();
-        }, 100);
-      };
+        // Force layout recalculation for mobile
+        handleResize = () => {
+          setTimeout(() => {
+            deck.layout();
+          }, 100);
+        };
 
-      window.addEventListener('resize', handleResize);
-      window.addEventListener('orientationchange', handleResize);
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('orientationchange', handleResize);
+      }
+    };
+    
+    initializeReveal();
 
-      return () => {
+    return () => {
+      if (handleResize) {
         window.removeEventListener('resize', handleResize);
         window.removeEventListener('orientationchange', handleResize);
-        if (deck) {
-          deck.destroy();
-        }
-      };
-    }
+      }
+      if (deck) {
+        deck.destroy();
+      }
+      
+      // Clean up reveal.js classes from HTML and body elements
+      document.documentElement.classList.remove('reveal-full-page');
+      document.body.classList.remove('reveal-viewport');
+    };
   });
 </script>
 
@@ -80,10 +97,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  
-  <!-- Reveal.js CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/black.min.css" />
 </svelte:head>
 
 <div class="reveal" bind:this={revealContainer}>
@@ -501,6 +514,9 @@
     background: rgba(66, 175, 250, 0.1) !important;
     padding: 2rem !important;
     border-radius: 8px !important;
+  }
+  :global(nav) {
+    color: var(--r-heading-color) !important;
   }
 
   /* Mobile optimizations */
