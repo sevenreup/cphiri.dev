@@ -320,21 +320,28 @@
 
     <!-- Local Examples -->
     <section>
-      <h2>Zikani Nyirenda - <em>The Polyglot Explorer</em></h2>
+      <h2>Zikani Nyirenda - <em>The Practical Experimenter</em></h2>
       <ul>
-        <li>Experiments across Go, Rust, Python, JavaScript, Kotlin</li>
-        <li>Perfect example of "what if I built this in X language?" approach</li>
+        <li>Creates random but useful tools: browser automation, file organizers, Git utilities</li>
+        <li>Experiments across Go, Rust, Python, Vue, and React</li>
+        <li>"What small problem can I solve today?" approach to coding</li>
+        <li>Perfect example of scratching personal itches through code</li>
       </ul>
+      <p class="text-center text-primary mt-4">
+        <a href="https://github.com/zikani03" target="_blank" class="underline">github.com/zikani03</a>
+      </p>
     </section>
 
     <section>
-      <h2>Jeremiah Chienda (liwoo) - <em>The Full-Stack Experimenter</em></h2>
+      <h2>Jeremiah Chienda - <em>The Full-Stack Experimenter</em></h2>
       <ul>
-        <li>Creates diverse projects from React components to API backends</li>
         <li>Explores different architectural patterns and frameworks</li>
         <li>Builds tools that solve real problems while learning new technologies</li>
         <li>Shows how recreational programming can span the entire tech stack</li>
       </ul>
+      <p class="text-center text-primary mt-4">
+        <a href="https://github.com/liwoo" target="_blank" class="underline">github.com/liwoo</a>
+      </p>
     </section>
 
     <!-- Global Examples -->
