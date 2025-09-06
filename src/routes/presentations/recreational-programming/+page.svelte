@@ -429,77 +429,78 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
-  /* Typography scaling - smaller on mobile */
+  /* Typography scaling - smaller on mobile - force override theme */
   :global(.reveal h1) {
-    font-size: clamp(1.2rem, 4vw, 3rem);
-    margin-bottom: 1rem;
+    font-size: clamp(1.2rem, 4vw, 3rem) !important;
+    margin-bottom: 1rem !important;
   }
 
   :global(.reveal h2) {
-    font-size: clamp(1rem, 3.5vw, 2rem);
-    margin-bottom: 0.8rem;
+    font-size: clamp(1rem, 3.5vw, 2rem) !important;
+    margin-bottom: 0.8rem !important;
   }
 
   :global(.reveal p) {
-    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-    line-height: 1.4;
-    margin-bottom: 1rem;
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem) !important;
+    line-height: 1.4 !important;
+    margin-bottom: 1rem !important;
   }
 
   :global(.reveal li) {
-    font-size: clamp(0.8rem, 2.2vw, 1rem);
-    line-height: 1.4;
-    margin: 0.3rem 0;
+    font-size: clamp(0.8rem, 2.2vw, 1rem) !important;
+    line-height: 1.4 !important;
+    margin: 0.3rem 0 !important;
   }
 
-  /* Custom classes */
-  .subtitle {
+  /* Custom classes - force override theme styles */
+  :global(.reveal .subtitle) {
     font-size: clamp(1rem, 3vw, 1.5rem) !important;
-    color: #888;
-    text-align: center;
+    color: #888 !important;
+    text-align: center !important;
   }
 
-  .big-question {
+  :global(.reveal .big-question) {
     font-size: clamp(1.1rem, 3.5vw, 1.8rem) !important;
-    font-weight: bold;
-    text-align: center;
-    color: #42affa;
+    font-weight: bold !important;
+    text-align: center !important;
+    color: #42affa !important;
   }
 
-  .definition {
+  :global(.reveal .definition) {
     font-size: clamp(1rem, 3vw, 1.4rem) !important;
-    font-style: italic;
-    text-align: center;
-    color: #ccc;
-    background: rgba(66, 175, 250, 0.1);
-    padding: 1rem;
-    border-radius: 8px;
+    font-style: italic !important;
+    text-align: center !important;
+    color: #ccc !important;
+    background: rgba(66, 175, 250, 0.1) !important;
+    padding: 1rem !important;
+    border-radius: 8px !important;
   }
 
-  .center-content {
-    text-align: center;
+  :global(.reveal .center-content) {
+    text-align: center !important;
   }
 
   :global(.reveal .highlight) {
-    color: #42affa;
-    font-weight: bold;
+    color: #42affa !important;
+    font-weight: bold !important;
   }
 
-  .takeaway {
-    background: rgba(66, 175, 250, 0.1);
-    padding: clamp(0.8rem, 2vw, 1.5rem);
-    border-left: 4px solid #42affa;
-    margin: 1rem 0;
-    font-size: clamp(0.85rem, 2.2vw, 1.1rem);
+  :global(.reveal .takeaway) {
+    background: rgba(66, 175, 250, 0.1) !important;
+    padding: clamp(0.8rem, 2vw, 1.5rem) !important;
+    border-left: 4px solid #42affa !important;
+    margin: 1rem 0 !important;
+    font-size: clamp(0.85rem, 2.2vw, 1.1rem) !important;
+    color: inherit !important;
   }
 
-  .final-quote {
+  :global(.reveal .final-quote) {
     font-size: clamp(1rem, 3vw, 1.4rem) !important;
-    font-style: italic;
-    color: #42affa;
-    background: rgba(66, 175, 250, 0.1);
-    padding: 2rem;
-    border-radius: 8px;
+    font-style: italic !important;
+    color: #42affa !important;
+    background: rgba(66, 175, 250, 0.1) !important;
+    padding: 2rem !important;
+    border-radius: 8px !important;
   }
 
   /* Mobile optimizations */
