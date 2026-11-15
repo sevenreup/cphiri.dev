@@ -42,8 +42,8 @@
 							class="bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded-full hover:bg-gray-300 transition-colors"
 							data-sveltekit-reload
 							href={`${$page.url.pathname}?tag=${tag}`}
-							onclick={(e) => e.stopPropagation()}
-						>{tag}</a>
+							onclick={(e) => e.stopPropagation()}>{tag}</a
+						>
 					{/each}
 				</div>
 				<a href={post.url} class="block">

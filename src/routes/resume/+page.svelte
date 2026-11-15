@@ -4,7 +4,6 @@
 	import Ad from '$lib/components/logos/ad.svelte';
 	import Alcor from '$lib/components/logos/alcor.svelte';
 	import Dtree from '$lib/components/logos/dtree.svelte';
-	import { Config } from '$lib/config';
 	import { workExperience, skillGroups } from '$lib/data/resume';
 </script>
 
@@ -69,4 +68,3 @@
 		</section>
 	</div>
 </div>
-<svelte:head><title>{Config.title} | Resume</title></svelte:head>

@@ -1,8 +1,16 @@
 import type { PostMeta } from '$lib/types/post';
 import { rawMetaToMeta } from '$lib/utils/posts';
+import { error } from '@sveltejs/kit';
+
+const posts = import.meta.glob<{
+	default: unknown;
+	metadata: import('$lib/types/post').PostMetaRaw;
+}>('../pages/*.md');
 
 export async function load({ params }) {
-	const post = await import(`../pages/${params.slug}.md`);
+	const resolve = posts[`../pages/${params.slug}.md`];
+	if (!resolve) error(404, 'Post not found');
+	const post = await resolve();
 	const content = post.default;
 
 	return {

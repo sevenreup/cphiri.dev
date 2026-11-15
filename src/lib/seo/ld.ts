@@ -1,12 +1,12 @@
 import { Config } from '$lib/config';
 import type { PostMeta } from '$lib/types/post';
 import type { Thing, WithContext, Person, Article } from 'schema-dts';
-import { createPostOgUrl, createPostUrl } from '../../utils/posts';
+import { createPostUrl } from '../../utils/posts';
 
 export type Schema = Thing | WithContext<Thing>;
 
 export function serializeSchema(thing: Schema) {
-	return `<script type="application/ld+json">${JSON.stringify(thing, null, 2)}</script>`;
+	return `<script type="application/ld+json">${JSON.stringify(thing, null, 2).replace(/</g, '\\u003c')}</script>`;
 }
 
 export const personalSchema: WithContext<Person> = {
@@ -23,7 +23,7 @@ export const personalSchema: WithContext<Person> = {
 export const blogSchema = (meta: PostMeta, slug: string): WithContext<Article> => ({
 	'@context': 'https://schema.org',
 	'@type': 'Article',
-	'@id': `${Config.url}#article`,
+	'@id': `${createPostUrl(slug)}#article`,
 	mainEntityOfPage: {
 		'@type': 'WebPage',
 		'@id': createPostUrl(slug)
@@ -31,11 +31,13 @@ export const blogSchema = (meta: PostMeta, slug: string): WithContext<Article> =
 	url: createPostUrl(slug),
 	headline: meta.title,
 	description: meta.description,
-	image: createPostOgUrl(slug),
+	image: `${Config.url}/og.png`,
 	keywords: meta.tags.join(', '),
 	author: {
 		'@type': 'Person',
-		name: 'Christopher Phiri'
+		'@id': personalSchema['@id'],
+		name: Config.title,
+		url: Config.url
 	},
 	publisher: {
 		'@type': 'Organization',
