@@ -5,132 +5,68 @@
 	import Alcor from '$lib/components/logos/alcor.svelte';
 	import Dtree from '$lib/components/logos/dtree.svelte';
 	import { Config } from '$lib/config';
-
-	type WorkExperience = {
-		name: string;
-		position: string;
-		meta: string;
-		body: string;
-		logo: string;
-	};
-
-	let workExperience: WorkExperience[] = [
-		{
-			name: 'D-Tree',
-			position: 'Software Engineer',
-			meta: '2022 - Present',
-			body: `Develop android apps using Kotlin and Jetpack compose, UI/UX Design, System requirements gathering, Implement and work with FHIR standards in native android.`,
-			logo: 'dtree'
-		},
-		{
-			name: 'Angle Dimensions',
-			position: 'Lead Mobile Developer',
-			meta: '2021 - 2022',
-			body: `Android developer in charge of design, development and maintenance of mobile applications written in Xamarin Forms and native android and IOS.`,
-			logo: 'ad'
-		},
-		{
-			name: 'Alcor Technologies',
-			position: 'Software Engineer',
-			meta: '2018 - Present',
-			body: `Developed cross platform (Flutter) as well as native mobile applications and created web apps for clients`,
-			logo: 'alcor'
-		},
-		{
-			name: 'Malawi University \nof Science and Technology',
-			position: 'Software Engineer',
-			meta: 'May 2020 - Nov 2020',
-			body: `Developed Native android applications and a backends to support the apps funded by the United Nations Development Program`,
-			logo: 'must'
-		},
-		{
-			name: 'Airtel Malawi',
-			position: 'Information Technology Intern',
-			meta: '2018 - 2020',
-			body: `Provision of system support, Provision of system support, Network and Database administration (IBM DB2).`,
-			logo: 'airtel'
-		}
-	];
+	import { workExperience, skillGroups } from '$lib/data/resume';
 </script>
 
 <div class="container">
-	<div>
-		<div class="h-16"></div>
-		<div class="flex flex-col gap-6">
-			<div class="p-8">
-				<SectionTitle title="Work Experience" subTitle="Dev" />
-				<div class="flex flex-col gap-6">
-					{#each workExperience as { name, position, meta, body, logo }}
-						<WorkExperience {name} {position} {meta} {body}>
-							{#if logo == 'ad'}
-								<Ad />
-							{:else if logo == 'dtree'}
-								<Dtree />
-							{:else if logo == 'alcor'}
-								<Alcor />
-							{:else}
-								<span>{logo.toLocaleUpperCase()}</span>
-							{/if}
-						</WorkExperience>
-					{/each}
+	<div class="mx-auto max-w-5xl py-16 flex flex-col gap-16">
+		<header class="flex flex-col gap-6">
+			<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+				<div>
+					<h1 class="text-4xl md:text-5xl font-medium">Resume</h1>
+					<p class="mt-3 text-xl">Christopher Phiri</p>
+					<p class="mt-1 opacity-70">Product Engineer · Mobile &amp; Full Stack Developer</p>
 				</div>
+				<a class="btn btn-outline self-start" href="/christopher-phiri-resume.pdf" download
+					>Download resume (PDF)</a
+				>
 			</div>
-		</div>
-		<div class="flex flex-col gap-6">
-			<div class="p-8">
-				<SectionTitle title="Education" />
-				<div class="content-trailing null flex-1">
-					<div class="flex flex-col gap-6">
-						<div class="experience-title-date">
-							<div class="text-xl">Bachelor of Science in Business Information Technology</div>
-							<div class="text-muted-foreground">Malawi University of Science and Technology</div>
-						</div>
-						<div class="text-projectpage-body info">
-							Major academic highlights (Data structures and algorithms, Database Management
-							Systems, Human-Computer Interaction)
-						</div>
+			<p class="max-w-3xl leading-relaxed">
+				Strong knowledge of object-oriented programming, developed through personal and team
+				projects across a range of frameworks. Interested in creating thoughtful user interfaces and
+				optimized systems that improve the overall user experience.
+			</p>
+			<div class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+				<span>Lilongwe, Malawi</span>
+				<a class="link link-hover" href="mailto:chris7phiri@gmail.com">chris7phiri@gmail.com</a>
+			</div>
+		</header>
+		<section aria-labelledby="experience-heading">
+			<h2 id="experience-heading" class="text-2xl font-medium mb-8">Work Experience</h2>
+			<div class="flex flex-col gap-12">
+				{#each workExperience as { name, position, meta, body, highlights, responsibilities, logo }}
+					<WorkExperience {name} {position} {meta} {body} {highlights} {responsibilities}>
+						{#if logo === 'ad'}<Ad />
+						{:else if logo === 'dtree'}<Dtree />
+						{:else if logo === 'alcor'}<Alcor />
+						{:else}<span class="text-2xl font-medium">{logo.toUpperCase()}</span>{/if}
+					</WorkExperience>
+				{/each}
+			</div>
+		</section>
+		<section aria-label="Skills and technology">
+			<SectionTitle title="Skills & Technology" />
+			<dl class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+				{#each skillGroups as { name, skills }}
+					<div>
+						<dt class="font-medium mb-2">{name}</dt>
+						<dd class="leading-relaxed opacity-80">{skills}</dd>
 					</div>
-				</div>
+				{/each}
+			</dl>
+		</section>
+		<section aria-label="Education">
+			<SectionTitle title="Education" />
+			<div class="flex flex-col gap-3">
+				<h3 class="text-xl">Bachelor of Science in Business Information Technology</h3>
+				<p>Malawi University of Science and Technology</p>
+				<p class="opacity-70">Sep 2016 - 2021</p>
+				<p class="leading-relaxed">
+					Academic highlights: Data Structures &amp; Algorithms, Database Management Systems,
+					Human-Computer Interaction.
+				</p>
 			</div>
-		</div>
-		<!-- <ul class="list-none">
-		<li class="pb-8">
-			<div class="p-8">
-				<h3 class="text-md font-medium">Products</h3>
-				<h4 class="text-md opacity-60">Apps, Website</h4>
-			</div>
-
-			<div class="flex overflow-x-scroll no-scrollbar gap-6 px-8">
-				<div class="flex flex-col gap-2 w-64 shrink-0">
-					<div
-						class="aspect-square bg-neutral-50 dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-xl flex-1 h-64 flex justify-center items-center"
-					>
-						<span>NA</span>
-					</div>
-					<p class="text-sm opacity-40">
-						<a href="https://figma.com">Mandede</a>
-						<span class="opacity-60">(2022 - Present)</span>
-					</p>
-				</div>
-
-				<div class="flex flex-col gap-2 w-64 shrink-0">
-					<div
-						class="aspect-square bg-neutral-50 dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-xl flex-1 h-64 flex justify-center items-center"
-					>
-						<span>NA</span>
-					</div>
-					<p class="text-sm opacity-40">
-						<a href="https://diagram.com">Tools</a>
-						<span class="opacity-60">(2021 - 2023)</span>
-					</p>
-				</div>
-			</div>
-		</li>
-	</ul> -->
-		<div class="h-16"></div>
+		</section>
 	</div>
 </div>
-
-<svelte:head>
-	<title>{Config.title} | Resume</title>
-</svelte:head>
+<svelte:head><title>{Config.title} | Resume</title></svelte:head>

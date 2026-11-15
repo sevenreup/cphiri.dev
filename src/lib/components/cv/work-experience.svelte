@@ -6,10 +6,20 @@
 		position: string;
 		meta: string;
 		body: string;
+		highlights?: string[];
+		responsibilities?: string;
 		children?: import('svelte').Snippet;
 	}
 
-	let { name, position, meta, body, children }: Props = $props();
+	let {
+		name,
+		position,
+		meta,
+		body,
+		highlights = [],
+		responsibilities = '',
+		children
+	}: Props = $props();
 </script>
 
 <div class="flex items-start flex-col">
@@ -24,7 +34,7 @@
 			>
 				{@render children?.()}
 			</div>
-			<div class="text-xl font-bold whitespace-pre-line">{name}</div>
+			<h3 class="text-xl font-bold whitespace-pre-line">{name}</h3>
 		</div>
 		<div class="content-trailing null flex-1">
 			<div class="flex flex-col gap-6">
@@ -32,9 +42,22 @@
 					<div class="text-xl">{position}</div>
 					<div class="text-muted-foreground">{meta}</div>
 				</div>
-				<div class="text-projectpage-body info">
+				<div class="text-projectpage-body info leading-relaxed">
 					{body}
 				</div>
+				{#if highlights.length}
+					<ul class="list-disc pl-5 space-y-3 leading-relaxed">
+						{#each highlights as highlight}
+							<li>{highlight}</li>
+						{/each}
+					</ul>
+				{/if}
+				{#if responsibilities}
+					<p class="leading-relaxed">
+						<span class="font-medium">Responsibilities:</span>
+						{responsibilities}
+					</p>
+				{/if}
 			</div>
 		</div>
 	</div>
